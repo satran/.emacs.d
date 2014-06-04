@@ -2,7 +2,7 @@
 (custom-theme-set-faces
   'oceanic
 ;;  '(default ((t (:foreground "#ffffff" :background "#1B2630"))))
-  '(default ((t (:foreground "#cfcfcf" :background "#2d2d2d"))))
+  '(default ((t (:foreground "#cfcfcf" :background "#24333E"))))
   '(cursor ((t (:background "#1b8ac0"))))
   '(fringe ((t (:background "#1a1a1a"))))
   '(region ((t (:background "#505f77"))))
