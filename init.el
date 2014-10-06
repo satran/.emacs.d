@@ -8,6 +8,7 @@
 
 ;; Adding custom theme directory
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/solarized-theme-20140714.2043")
 
 ;; Setting line numbers to all files
 (global-linum-mode 1)
@@ -22,16 +23,13 @@
 (setq inhibit-startup-message t)
 
 ;; Set C style to k&r
-(setq c-default-style "k&r"
-          c-basic-offset 4)
+(setq c-default-style "linux")
 
 ;; Set the cursor to a bar
 (setq default-cursor-type 'bar)
 
 ;; Disable the menubar for terminal
 (menu-bar-mode -1)
-
-(load-theme 'solarized-light t)
 
 ;; GUI specific settings
 ;; Load the customizations after an emacsclient startsup.
@@ -40,6 +38,7 @@
   (when (or window-system frame)
     ;; Setting the color scheme.
     ;; (load-theme 'oceanic t)
+    (load-theme 'solarized-light t)
 
     ;; Highlighting current line
     (global-hl-line-mode 1)
@@ -47,8 +46,8 @@
     (set-face-italic-p 'italic nil)
 
     ;; Disabling the fringe
-    (set-fringe-mode '(0 . 0))
-
+    ;;(set-fringe-mode '(0 . 0))
+    '(fringe-mode (quote (1 . 1)) nil (fringe))
     ;; Disable the scrollbar
     (scroll-bar-mode -1)
 
@@ -58,7 +57,7 @@
        '(default ((t (:height 120 :width normal :family "Menlo"))))))
     ;; Setting the default font
     ;; (set-default-font "Meslo-12")
-    ;; (set-face-attribute 'default nil :font "Inconsolata 12")
+    (set-face-attribute 'default nil :font "Meslo LG M 9")
 
     ;; Disable the toolbar
     (tool-bar-mode -1)))
@@ -82,7 +81,7 @@
 
 ;; Width and Height
 (add-to-list 'default-frame-alist '(height . 50))
-(add-to-list 'default-frame-alist '(width . 85)) 
+(add-to-list 'default-frame-alist '(width . 88)) 
 
 ;; On enter new line and indent
 (defun set-newline-and-indent ()
@@ -151,7 +150,11 @@
 (global-visual-line-mode 1)
 
 ;; Keybinding to start the shell
-(global-set-key (kbd "C-z") 'shell)
+(global-set-key (kbd "C-z") 'eshell)
+(global-set-key (kbd "C-S-z") 'ansi-term)
+(setq Eshell-directory-name "/home/satran/.emacs.d/eshell")
+(setq eshell-prompt-function (lambda () (concat "% ")))
+(setq eshell-prompt-regexp "% ")
 
 ;; Settings keybindings for Scroll line by line.
 (global-set-key (kbd "C-M-g") 'scroll-up-line)
@@ -174,15 +177,16 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"] t)
  '(ecb-options-version "2.40")
+ '(gnus-visible-headers (quote ("^From:" "^Subject:" "^Date:" "^To:" "^[BGF]?Cc:")))
  '(ruler-mode-current-column-char 42)
  '(ruler-mode-fill-column-char 124)
  '(speedbar-directory-button-trim-method (quote trim))
  '(speedbar-frame-parameters (quote ((minibuffer) (width . 40) (border-width . 0) (menu-bar-lines . 0) (tool-bar-lines . 0) (unsplittable . t) (left-fringe . 0))))
  '(speedbar-hide-button-brackets-flag t)
- '(speedbar-use-images nil)
- '(sr-speedbar-right-side nil)
  '(speedbar-show-unknown-files t)
- '(speedbar-tag-face ((t (:foreground "gray80"))) t))
+ '(speedbar-tag-face ((t (:foreground "gray80"))))
+ '(speedbar-use-images nil)
+ '(sr-speedbar-right-side nil))
 
 (setq gdb-many-windows t)
 
@@ -251,6 +255,10 @@
 (global-set-key [f11] 'fullscreen)
 
 ;; Go lang setup
+;; Install go-mode, go-eldoc
+;; Go modules required
+;;     go get code.google.com/p/rog-go/exp/cmd/godef
+;;     go get -u github.com/nsf/gocode
 (add-hook 'before-save-hook 'gofmt-before-save)
 (add-hook 'go-mode-hook (lambda ()
                           (local-set-key (kbd "C-c C-r") 'go-remove-unused-imports)))
@@ -259,3 +267,19 @@
 (add-hook 'go-mode-hook (lambda ()
                           (local-set-key (kbd \"M-.\") 'godef-jump)))
 (add-hook 'go-mode-hook 'go-eldoc-setup)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+(setq gnus-summary-line-format "%I- %s [%a|%d]\n")
+(setq user-full-name "Satyajit Ranjeev"
+      user-mail-address "s@ranjeev.in")
+
+(setq linum-disabled-modes-list
+      '(eshell-mode term-mode wl-summary-mode compilation-mode))
+(defun linum-on ()
+  (unless (or (minibufferp)
+	      (member major-mode linum-disabled-modes-list)) (linum-mode 1)))

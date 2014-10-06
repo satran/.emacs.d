@@ -1,0 +1,128 @@
+ls
+ff config.h 
+make
+yum search xcb | grep devel
+make
+make
+ls
+./fucn-addr test
+find -iname *~
+find . -iname *~
+find . -iname '*~'
+find . -iname '*~' | xargs rm
+ls
+ff dwarf.lines
+cd $GOROOT
+ls
+cd /usr/local/go/
+ls
+cd src/
+ls
+cd pkg/debug/dwarf/
+ls
+ff type_test.go 
+ls
+ff open.go 
+ls
+pwd
+q
+pwd
+git branch
+pwd
+ls
+cd ..
+ls
+pwd
+go get github.com/lib/pq
+diff ../../lib/pq/conn.go conn.go
+diff conn.go ../../lib/pq/conn.go
+ediff
+edif ../../lib/pq/conn.go conn.go
+ediff ../../lib/pq/conn.go conn.go
+pwd
+git merge origin/dev-2.4
+git branch
+git push origin bktree-docs
+pwd
+make
+sudo make install
+q
+q
+ls
+diff a b
+man ls
+top
+q
+./debugo /home/satran/src/github.com/satran/debugo/test
+go build debugo.go
+./debugo /home/satran/src/github.com/satran/debugo/test
+go build debugo.go
+./debugo /home/satran/src/github.com/satran/debugo/test
+go build debugo.go
+./debugo /home/satran/src/github.com/satran/debugo/test
+ls
+bash incbright.sh 
+bash incbright.sh 
+cat incbright.sh 
+cat /sys/devices/virtual/backlight/nvidia_backlight/brightness
+cp incbright.sh decbright.sh
+ff decbright.sh 
+ls
+chmod a+x incbright.sh 
+chmod a+x decbright.sh 
+./decbright.sh 
+./decbright.sh 
+./decbright.sh 
+incbright.sh 
+incbright.sh 
+incbright.sh 
+make
+ls
+./dwarf-det debug
+./dwarf-det test
+./dwarf-det test
+./dwarf-det test
+pwd
+./dwarf-det /home/satran/src/github.com/satran/debugo
+./dwarf-det /home/satran/src/github.com/satran/debugo/test
+./dwarf-det /home/satran/src/github.com/satran/debugo/test
+ls
+./dwarf-det /home/satran/src/github.com/satran/debugo/debug
+./dwarf-det /home/satran/src/github.com/satran/debugo/debug
+./dwarf-det /home/satran/src/github.com/satran/debugo/test
+./dwarf-det /home/satran/src/github.com/satran/debugo/test
+q
+./dwarf-det /home/satran/src/github.com/satran/debugo/test
+./dwarf-det /home/satran/src/github.com/satran/debugo/test
+./dwarf-det /home/satran/src/github.com/satran/debugo/dwarf-det
+./dwarf-det /home/satran/src/github.com/satran/debugo/dwarf-det
+./dwarf-det /home/satran/src/github.com/satran/debugo/test
+./dwarf-det /home/satran/src/github.com/satran/debugo/test
+./dwarf-det /home/satran/src/github.com/satran/debugo/test
+./dwarf-det /home/satran/src/github.com/satran/debugo/test
+./dwarf-det /home/satran/src/github.com/satran/debugo/test
+ls
+grep -rn newelf *.go
+grep -rn elftbl *.go
+pwd
+q
+ls
+./lines debugo
+./lines debugo
+./lines debugo
+./lines debugo
+./lines debugo
+./fucn-addr 
+./fucn-addr debugo
+./lines debugo
+./lines debugo
+./lines debugo
+ls
+make
+ff Makefile 
+ff Makefile 
+make
+ls
+./simplereader simplereader
+./simplereader /home/satran/src/github.com/satran/debugo/debugo
+./frame1 
