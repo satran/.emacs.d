@@ -2,13 +2,16 @@
 (let ((default-directory "~/.emacs.d/"))
       (normal-top-level-add-subdirs-to-load-path))
 
-(setq exec-path (append exec-path '("/usr/local/go/bin" "/home/satyajit/bin")))
+(setenv "GOROOT" "/usr/local/go")
 (setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name "~/bin")))
 (setenv "PATH" (concat (getenv "PATH") ":" "/usr/local/go/bin"))
+(setenv "GOPATH"(getenv "HOME"))
+
+(setq exec-path (append exec-path '("/usr/local/go/bin" "/Users/satran/bin")))
 
 ;; Adding custom theme directory
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(add-to-list 'custom-theme-load-path "/home/satran/.emacs.d/elpa/solarized-theme-20141004.2115")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/solarized-theme-20141004.2115")
 
 ;; Setting line numbers to all files
 (global-linum-mode 1)
@@ -30,6 +33,9 @@
 
 ;; Disable the menubar for terminal
 (menu-bar-mode -1)
+
+;; Globally disable syntax highlight
+(global-font-lock-mode 0)
 
 ;; GUI specific settings
 ;; Load the customizations after an emacsclient startsup.
