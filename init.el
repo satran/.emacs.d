@@ -8,7 +8,7 @@
 
 ;; Adding custom theme directory
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/solarized-theme-20140714.2043")
+(add-to-list 'custom-theme-load-path "/home/satran/.emacs.d/elpa/solarized-theme-20141004.2115")
 
 ;; Setting line numbers to all files
 (global-linum-mode 1)
@@ -57,7 +57,7 @@
        '(default ((t (:height 120 :width normal :family "Menlo"))))))
     ;; Setting the default font
     ;; (set-default-font "Meslo-12")
-    (set-face-attribute 'default nil :font "Meslo LG M 9")
+    (set-face-attribute 'default nil :font "DejaVu Sans Mono 17")
 
     ;; Disable the toolbar
     (tool-bar-mode -1)))
@@ -175,13 +175,22 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"] t)
+ '(ansi-color-names-vector
+   ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
  '(ecb-options-version "2.40")
  '(gnus-visible-headers (quote ("^From:" "^Subject:" "^Date:" "^To:" "^[BGF]?Cc:")))
  '(ruler-mode-current-column-char 42)
  '(ruler-mode-fill-column-char 124)
  '(speedbar-directory-button-trim-method (quote trim))
- '(speedbar-frame-parameters (quote ((minibuffer) (width . 40) (border-width . 0) (menu-bar-lines . 0) (tool-bar-lines . 0) (unsplittable . t) (left-fringe . 0))))
+ '(speedbar-frame-parameters
+   (quote
+    ((minibuffer)
+     (width . 40)
+     (border-width . 0)
+     (menu-bar-lines . 0)
+     (tool-bar-lines . 0)
+     (unsplittable . t)
+     (left-fringe . 0))))
  '(speedbar-hide-button-brackets-flag t)
  '(speedbar-show-unknown-files t)
  '(speedbar-tag-face ((t (:foreground "gray80"))))
@@ -267,6 +276,7 @@
 (add-hook 'go-mode-hook (lambda ()
                           (local-set-key (kbd \"M-.\") 'godef-jump)))
 (add-hook 'go-mode-hook 'go-eldoc-setup)
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -274,12 +284,56 @@
  ;; If there is more than one, they won't work right.
  )
 
-(setq gnus-summary-line-format "%I- %s [%a|%d]\n")
-(setq user-full-name "Satyajit Ranjeev"
-      user-mail-address "s@ranjeev.in")
-
 (setq linum-disabled-modes-list
-      '(eshell-mode term-mode wl-summary-mode compilation-mode))
+      '(eshell-mode term-mode wl-summary-mode compilation-mode eww-mode
+		    mu4e-about-mode mu4e-compose-mode mu4e-headers-mode
+		    mu4e-main-mode mu4e-view-mode mu4e~main-toggle-mail-sending-mode))
 (defun linum-on ()
   (unless (or (minibufferp)
 	      (member major-mode linum-disabled-modes-list)) (linum-mode 1)))
+
+(setq gnus-summary-line-format "%I- %s [%a|%d]\n")
+
+;; Email settings for mu4e
+(add-to-list 'load-path "/home/satran/Downloads/mu-0.9.9.5/mu4e")
+(require 'mu4e)
+(setq mu4e-maildir )
+;; these are actually the defaults
+(setq
+ mu4e-maildir       "/home/satran/mail/ranjeev"   ;; top-level Maildir
+ mu4e-sent-folder   "/[Gmail].Sent"       ;; folder for sent messages
+ mu4e-drafts-folder "/[Gmail].Drafts"     ;; unfinished messages
+ mu4e-trash-folder  "/[Gmail].Trash"      ;; trashed messages
+ mu4e-refile-folder "/archive")   ;; saved messages
+
+(setq mu4e-headers-fields (quote ((:human-date . 12) (:from . 22) (:subject))))
+;; don't save message to Sent Messages, Gmail/IMAP takes care of this
+(setq mu4e-sent-messages-behavior 'delete)
+(setq mu4e-maildir-shortcuts
+    '( ("/INBOX"               . ?i)
+       ("/[Gmail].Sent Mail"   . ?s)
+       ("/[Gmail].Trash"       . ?t)
+       ("/[Gmail].All Mail"    . ?a)))
+;; allow for updating mail using 'U' in the main view:
+(setq mu4e-get-mail-command "offlineimap")
+
+(setq
+   user-mail-address "s@ranjeev.in"
+   user-full-name  "Satyajit Ranjeev")
+
+(setq mu4e-compose-signature (concat
+      "Satyajit\n"
+      "http://satyajit.ranjeev.in\n"))
+
+;; alternatively, for emacs-24 you can use:
+(setq message-send-mail-function 'smtpmail-send-it
+     smtpmail-stream-type 'starttls
+     smtpmail-default-smtp-server "smtp.gmail.com"
+     smtpmail-smtp-server "smtp.gmail.com"
+     smtpmail-smtp-service 587)
+
+;; don't keep message buffers around
+(setq message-kill-buffer-on-exit t)
+
+;; Enable html to be rendered properly
+(setq mu4e-html2text-command "html2text -utf8 -width 72")
