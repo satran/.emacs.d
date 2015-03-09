@@ -1,6 +1,6 @@
 ;; Setting the default load-directory
 (let ((default-directory "~/.emacs.d/"))
-      (normal-top-level-add-subdirs-to-load-path))
+  (normal-top-level-add-subdirs-to-load-path))
 
 (setenv "GOROOT" "/usr/local/go")
 (setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name "~/bin")))
@@ -11,7 +11,7 @@
 
 ;; Adding custom theme directory
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/solarized-theme-20141004.2115")
+;;(add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/solarized-theme-20150122.15")
 
 ;; Setting line numbers to all files
 (global-linum-mode 1)
@@ -37,6 +37,9 @@
 ;; Globally disable syntax highlight
 (global-font-lock-mode 0)
 
+;; Move across split windows using the shit+arrow keys
+(windmove-default-keybindings)
+
 ;; GUI specific settings
 ;; Load the customizations after an emacsclient startsup.
 (defun disable-crappy-frames (&optional frame)
@@ -44,7 +47,7 @@
   (when (or window-system frame)
     ;; Setting the color scheme.
     ;; (load-theme 'oceanic t)
-    (load-theme 'solarized-light t)
+    (load-theme 'sat-acme t)
 
     ;; Highlighting current line
     (global-hl-line-mode 1)
@@ -63,7 +66,7 @@
        '(default ((t (:height 120 :width normal :family "Menlo"))))))
     ;; Setting the default font
     ;; (set-default-font "Meslo-12")
-    (set-face-attribute 'default nil :font "DejaVu Sans Mono 17")
+    (set-face-attribute 'default nil :font "Meslo LG M 14")
 
     ;; Disable the toolbar
     (tool-bar-mode -1)))
@@ -86,37 +89,13 @@
 (package-initialize)
 
 ;; Width and Height
-(add-to-list 'default-frame-alist '(height . 50))
-(add-to-list 'default-frame-alist '(width . 88)) 
+(add-to-list 'default-frame-alist '(height . 80))
+(add-to-list 'default-frame-alist '(width . 100)) 
 
 ;; On enter new line and indent
 (defun set-newline-and-indent ()
   (local-set-key (kbd "RET") 'newline-and-indent))
 (add-hook 'c-mode 'set-newline-and-indent)
-
-
-;; Python Settings
-(setq
- python-check-command "epylint"
- python-shell-interpreter "/usr/bin/ipython"
- python-shell-interpreter-args ""
- python-shell-prompt-regexp "[0-9]+ > "
- python-shell-prompt-output-regexp "[0-9]+ < "
- python-shell-completion-setup-code "from IPython.core.completerlib import module_completion"
- python-shell-completion-module-string-code "';'.join(module_completion('''%s'''))\n"
- python-shell-completion-string-code "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
-
-;; switch to the interpreter after executing code
-(setq py-shell-switch-buffers-on-execute-p t)
-(setq py-switch-buffers-on-execute-p t)
-
-;; try to automagically figure out indentation
-(setq py-smart-indentation t)
-
-;; Cython mode
-(autoload 'cython-mode "cython-mode" "Loads mode for Cython files." t)
-(add-to-list 'auto-mode-alist '("\\.pxd\\'" . cython-mode))
-(add-to-list 'auto-mode-alist '("\\.pyx\\'" . cython-mode))
 
 ;; CMake mode
 (autoload 'cmake-mode "cmake-mode" "Loads mode for CMake files." t)
@@ -147,7 +126,7 @@
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 
-; Settings for enforcing to use UNIX endlines
+					; Settings for enforcing to use UNIX endlines
 (set-default-coding-systems 'utf-8-unix)
 (prefer-coding-system 'utf-8-unix)
 (set-default default-buffer-file-coding-system 'utf-8-unix)
@@ -169,12 +148,12 @@
 ;; CTags settings
 (setq path-to-ctags "/usr/bin/etags")
 (defun create-tags (dir-name)
-    "Create tags file."
-    (interactive "DDirectory: ")
-    (let ((full-dir-name (directory-file-name dir-name)))
-      (shell-command
-       (format "find %s -iname \"*.[c,h]\" | xargs %s -f %s/TAGS -R"
-               full-dir-name path-to-ctags full-dir-name))))
+  "Create tags file."
+  (interactive "DDirectory: ")
+  (let ((full-dir-name (directory-file-name dir-name)))
+    (shell-command
+     (format "find %s -iname \"*.[c,h]\" | xargs %s -f %s/TAGS -R"
+	     full-dir-name path-to-ctags full-dir-name))))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -280,15 +259,8 @@
 (add-hook 'go-mode-hook (lambda ()
                           (local-set-key (kbd "C-c i") 'go-goto-imports)))
 (add-hook 'go-mode-hook (lambda ()
-                          (local-set-key (kbd \"M-.\") 'godef-jump)))
+                          (local-set-key (kbd "M-.") 'godef-jump)))
 (add-hook 'go-mode-hook 'go-eldoc-setup)
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
 (setq linum-disabled-modes-list
       '(eshell-mode term-mode wl-summary-mode compilation-mode eww-mode
@@ -300,46 +272,7 @@
 
 (setq gnus-summary-line-format "%I- %s [%a|%d]\n")
 
-;; Email settings for mu4e
-(add-to-list 'load-path "/home/satran/Downloads/mu-0.9.9.5/mu4e")
-(require 'mu4e)
-(setq mu4e-maildir )
-;; these are actually the defaults
-(setq
- mu4e-maildir       "/home/satran/mail/ranjeev"   ;; top-level Maildir
- mu4e-sent-folder   "/[Gmail].Sent"       ;; folder for sent messages
- mu4e-drafts-folder "/[Gmail].Drafts"     ;; unfinished messages
- mu4e-trash-folder  "/[Gmail].Trash"      ;; trashed messages
- mu4e-refile-folder "/archive")   ;; saved messages
-
-(setq mu4e-headers-fields (quote ((:human-date . 12) (:from . 22) (:subject))))
-;; don't save message to Sent Messages, Gmail/IMAP takes care of this
-(setq mu4e-sent-messages-behavior 'delete)
-(setq mu4e-maildir-shortcuts
-    '( ("/INBOX"               . ?i)
-       ("/[Gmail].Sent Mail"   . ?s)
-       ("/[Gmail].Trash"       . ?t)
-       ("/[Gmail].All Mail"    . ?a)))
-;; allow for updating mail using 'U' in the main view:
-(setq mu4e-get-mail-command "offlineimap")
-
-(setq
-   user-mail-address "s@ranjeev.in"
-   user-full-name  "Satyajit Ranjeev")
-
-(setq mu4e-compose-signature (concat
-      "Satyajit\n"
-      "http://satyajit.ranjeev.in\n"))
-
-;; alternatively, for emacs-24 you can use:
-(setq message-send-mail-function 'smtpmail-send-it
-     smtpmail-stream-type 'starttls
-     smtpmail-default-smtp-server "smtp.gmail.com"
-     smtpmail-smtp-server "smtp.gmail.com"
-     smtpmail-smtp-service 587)
-
-;; don't keep message buffers around
-(setq message-kill-buffer-on-exit t)
-
-;; Enable html to be rendered properly
-(setq mu4e-html2text-command "html2text -utf8 -width 72")
+(mapc
+ (lambda (face)
+   (set-face-attribute face nil :weight 'normal :underline nil))
+ (face-list))
