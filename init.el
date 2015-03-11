@@ -11,7 +11,8 @@
 
 ;; Adding custom theme directory
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-;;(add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/solarized-theme-20150122.15")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/solarized-theme-20150122.15")
+;;(add-to-list 'custom-theme-load-path "~/src/github.com//emacs-color-theme-solarized")
 
 ;; Setting line numbers to all files
 (global-linum-mode 1)
@@ -47,7 +48,7 @@
   (when (or window-system frame)
     ;; Setting the color scheme.
     ;; (load-theme 'oceanic t)
-    (load-theme 'sat-acme t)
+    (load-theme 'solarized-dark t)
 
     ;; Highlighting current line
     (global-hl-line-mode 1)
@@ -163,6 +164,9 @@
  '(ansi-color-names-vector
    ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
  '(ecb-options-version "2.40")
+ '(erc-notice-highlight-type (quote prefix))
+ '(erc-prompt ">")
+ '(global-font-lock-mode nil)
  '(gnus-visible-headers (quote ("^From:" "^Subject:" "^Date:" "^To:" "^[BGF]?Cc:")))
  '(ruler-mode-current-column-char 42)
  '(ruler-mode-fill-column-char 124)
@@ -263,7 +267,7 @@
 (add-hook 'go-mode-hook 'go-eldoc-setup)
 
 (setq linum-disabled-modes-list
-      '(eshell-mode term-mode wl-summary-mode compilation-mode eww-mode
+      '(eshell-mode term-mode wl-summary-mode compilation-mode eww-mode erc-mode
 		    mu4e-about-mode mu4e-compose-mode mu4e-headers-mode
 		    mu4e-main-mode mu4e-view-mode mu4e~main-toggle-mail-sending-mode))
 (defun linum-on ()
@@ -276,3 +280,15 @@
  (lambda (face)
    (set-face-attribute face nil :weight 'normal :underline nil))
  (face-list))
+
+(display-time-mode t)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(erc-default-face ((t (:foreground "light gray"))))
+ '(erc-input-face ((t (:foreground "dark gray"))))
+ '(erc-nick-default-face ((t (:foreground "gray" :weight normal))))
+ '(erc-notice-face ((t (:foreground "dim gray"))))
+ '(erc-timestamp-face ((t (:foreground "dim gray")))))
