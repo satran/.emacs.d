@@ -15,7 +15,7 @@
 ;;(add-to-list 'custom-theme-load-path "~/src/github.com//emacs-color-theme-solarized")
 
 ;; Setting line numbers to all files
-(global-linum-mode 1)
+;;(global-linum-mode 1)
 
 ;; Setting column number
 (column-number-mode 1)
@@ -57,7 +57,7 @@
 
     ;; Disabling the fringe
     ;;(set-fringe-mode '(0 . 0))
-    '(fringe-mode (quote (1 . 1)) nil (fringe))
+    ;;'(fringe-mode (quote (1 . 1)) nil (fringe))
     ;; Disable the scrollbar
     (scroll-bar-mode -1)
 
@@ -164,6 +164,7 @@
  '(ansi-color-names-vector
    ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
  '(ecb-options-version "2.40")
+ '(erc-hide-list (quote ("JOIN" "KICK" "MODE")))
  '(erc-notice-highlight-type (quote prefix))
  '(erc-prompt ">")
  '(global-font-lock-mode nil)
@@ -292,3 +293,4 @@
  '(erc-nick-default-face ((t (:foreground "gray" :weight normal))))
  '(erc-notice-face ((t (:foreground "dim gray"))))
  '(erc-timestamp-face ((t (:foreground "dim gray")))))
+
