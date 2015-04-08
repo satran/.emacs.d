@@ -9,7 +9,7 @@
    'acme
    `(cursor ((,class (:background "#444444" :foreground "#ffffff"))))
    `(border-color ((,class (:background "#87893B"))))
-   `(default ((,class (:background "#FFFFE4" :foreground "#000000"))))
+   `(default ((,class (:background "#FFFFE4" :foreground "#444444"))))
    `(highlight ((,class (:background "#DBDBAF"))))
    `(fringe ((,class (:background "#FFFFE4"))))
    `(mode-line ((,class (:box (:line-width 1 :style 'released-button)
