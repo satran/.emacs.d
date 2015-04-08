@@ -1,0 +1,4 @@
+alias git git --no-pager $*
+alias ff find-file $*
+alias gst git status
+alias q exit

@@ -2,6 +2,7 @@ auto-save-list/
 elpa/
 newsticker/
 tramp
-eshell/
+eshell/history
+eshell/lastdir
 ido.last
 *~
