@@ -48,7 +48,7 @@
   (when (or window-system frame)
     ;; Setting the color scheme.
     ;; (load-theme 'oceanic t)
-    (load-theme 'solarized-dark t)
+    (load-theme 'acme t)
 
     ;; Highlighting current line
     (global-hl-line-mode 1)
@@ -292,5 +292,5 @@
  '(erc-input-face ((t (:foreground "dark gray"))))
  '(erc-nick-default-face ((t (:foreground "gray" :weight normal))))
  '(erc-notice-face ((t (:foreground "dim gray"))))
- '(erc-timestamp-face ((t (:foreground "dim gray")))))
-
+ '(erc-timestamp-face ((t (:foreground "dim gray"))))
+ '(magit-item-highlight ((t nil))))
