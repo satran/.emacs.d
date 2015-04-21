@@ -230,7 +230,22 @@
     (search-forward x)))
 (global-set-key "\C-\M-f" 'move-past-next-char)
 
-
+(defun plumb ()
+  "sort of the plumber found in plan9"
+  (interactive)
+  (let ((file "") (line-no 1) (line (thing-at-point 'line)))
+    (string-match "\\([~0-9a-zA-Z\\-\\.\\/]+\\):\?\\([0-9]*\\)" line)
+    (setq file (match-string 1 line))
+    (setq line-no (match-string 2 line))
+    (if (and (not (string-equal file "")) (file-exists-p file))
+	(progn
+	  (message "%s:%s" file line-no)
+	  (switch-to-buffer (find-file-noselect file))
+	  (beginning-of-buffer)
+	  (if line-no (forward-line (- (string-to-number line-no) 1))))
+      (message "%s not found" file))))
+;;(global-set-key "\C-c\C-g" 'plumb)
+(global-set-key (kbd "<C-return>") 'plumb)
 
 ;; A few key bindings that I would want to remember
 ;; C-x r <SPC> <char-for-register> - Mark a register
@@ -288,9 +303,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(erc-default-face ((t (:foreground "light gray"))))
- '(erc-input-face ((t (:foreground "dark gray"))))
- '(erc-nick-default-face ((t (:foreground "gray" :weight normal))))
- '(erc-notice-face ((t (:foreground "dim gray"))))
- '(erc-timestamp-face ((t (:foreground "dim gray"))))
  '(magit-item-highlight ((t nil))))
