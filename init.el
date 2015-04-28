@@ -3,6 +3,7 @@
   (normal-top-level-add-subdirs-to-load-path))
 
 (setenv "GOROOT" "/usr/local/go")
+(setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name "~/scripts")))
 (setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name "~/bin")))
 (setenv "PATH" (concat (getenv "PATH") ":" "/usr/local/go/bin"))
 (setenv "GOPATH"(getenv "HOME"))
@@ -12,7 +13,6 @@
 ;; Adding custom theme directory
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/solarized-theme-20150122.15")
-;;(add-to-list 'custom-theme-load-path "~/src/github.com//emacs-color-theme-solarized")
 
 ;; Setting line numbers to all files
 ;;(global-linum-mode 1)
@@ -48,7 +48,7 @@
   (when (or window-system frame)
     ;; Setting the color scheme.
     ;; (load-theme 'oceanic t)
-    (load-theme 'acme t)
+    (load-theme 'solarized-dark t)
 
     ;; Highlighting current line
     (global-hl-line-mode 1)
@@ -81,6 +81,9 @@
 
 ;; Have those awesome matching pairs
 (electric-pair-mode t)
+
+;; Highlight matching parenthesis
+(show-paren-mode 1)
 
 ;; Setting up Marmalade and gny and melpa
 (require 'package)
@@ -117,8 +120,6 @@
 
 (setq recentf-auto-cleanup 'never) 
 
-(require 'git)
-
 ;; IDO mode.
 (require 'ido)
 (ido-mode t)
@@ -127,7 +128,7 @@
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 
-					; Settings for enforcing to use UNIX endlines
+;; Settings for enforcing to use UNIX endlines
 (set-default-coding-systems 'utf-8-unix)
 (prefer-coding-system 'utf-8-unix)
 (set-default default-buffer-file-coding-system 'utf-8-unix)
@@ -162,30 +163,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
-   ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
- '(ecb-options-version "2.40")
+   ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"] t)
  '(erc-hide-list (quote ("JOIN" "KICK" "MODE")))
  '(erc-notice-highlight-type (quote prefix))
  '(erc-prompt ">")
  '(global-font-lock-mode nil)
  '(gnus-visible-headers (quote ("^From:" "^Subject:" "^Date:" "^To:" "^[BGF]?Cc:")))
- '(ruler-mode-current-column-char 42)
- '(ruler-mode-fill-column-char 124)
- '(speedbar-directory-button-trim-method (quote trim))
- '(speedbar-frame-parameters
-   (quote
-    ((minibuffer)
-     (width . 40)
-     (border-width . 0)
-     (menu-bar-lines . 0)
-     (tool-bar-lines . 0)
-     (unsplittable . t)
-     (left-fringe . 0))))
- '(speedbar-hide-button-brackets-flag t)
- '(speedbar-show-unknown-files t)
- '(speedbar-tag-face ((t (:foreground "gray80"))))
- '(speedbar-use-images nil)
- '(sr-speedbar-right-side nil))
+ '(w3m-default-display-inline-images t))
 
 (setq gdb-many-windows t)
 
@@ -195,9 +179,6 @@
 ;; Shortcut for compiling
 (global-set-key [(f9)] 'compile)
 
-;; Javascript mode
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-
 (require 'fill-column-indicator)
 (setq-default fci-rule-column 80)
 (setq-default fci-rule-color "#555555")
@@ -206,7 +187,6 @@
 (setq c-eldoc-includes "`pkg-config glib-2.0 tokyocabinet --cflags` -I./ -I../ ")
 (load "c-eldoc")
 (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
-
 
 ;; A few of my own customizations
 ;; Disable all extras of GUI.
@@ -234,7 +214,7 @@
   "sort of the plumber found in plan9"
   (interactive)
   (let ((file "") (line-no 1) (line (thing-at-point 'line)))
-    (string-match "\\([~0-9a-zA-Z\\-\\.\\/]+\\):\?\\([0-9]*\\)" line)
+    (string-match "\\([_~0-9a-zA-Z\\-\\.\\/]+\\):\?\\([0-9]*\\)" line)
     (setq file (match-string 1 line))
     (setq line-no (match-string 2 line))
     (if (and (not (string-equal file "")) (file-exists-p file))
@@ -303,4 +283,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(magit-item-highlight ((t nil))))
+ '(magit-item-highlight ((t nil)))
+ '(w3m-anchor ((t (:foreground "DeepSkyBlue4"))))
+ '(w3m-arrived-anchor ((t (:foreground "DodgerBlue4")))))
