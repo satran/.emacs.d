@@ -12,7 +12,7 @@
 
 ;; Adding custom theme directory
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/solarized-theme-20150122.15")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/solarized-theme-1.0.0")
 
 ;; Setting line numbers to all files
 ;;(global-linum-mode 1)
@@ -56,7 +56,7 @@
     (set-face-italic-p 'italic nil)
 
     ;; Disabling the fringe
-    ;;(set-fringe-mode '(0 . 0))
+    (set-fringe-mode '(0 . 0))
     ;;'(fringe-mode (quote (1 . 1)) nil (fringe))
     ;; Disable the scrollbar
     (scroll-bar-mode -1)
@@ -91,10 +91,6 @@
                          ("marmalade" . "http://marmalade-repo.org/packages/")
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
 (package-initialize)
-
-;; Width and Height
-(add-to-list 'default-frame-alist '(height . 80))
-(add-to-list 'default-frame-alist '(width . 100)) 
 
 ;; On enter new line and indent
 (defun set-newline-and-indent ()
@@ -286,3 +282,13 @@
  '(magit-item-highlight ((t nil)))
  '(w3m-anchor ((t (:foreground "DeepSkyBlue4"))))
  '(w3m-arrived-anchor ((t (:foreground "DodgerBlue4")))))
+
+;; slime settings to load sbcl
+(add-to-list 'load-path "/usr/local/bin/sbcl")
+(require 'slime)
+(add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
+(add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
+;; Optionally, specify the lisp program you are using. Default is "lisp"
+(setq inferior-lisp-program "/usr/local/bin/sbcl") 
+
+(setq w3m-command "/usr/local/bin/w3m")
