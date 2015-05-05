@@ -3,6 +3,8 @@
   (normal-top-level-add-subdirs-to-load-path))
 
 (setenv "GOROOT" "/usr/local/go")
+(setenv "EDITOR" "emacs")
+(setenv "VISUAL" "emacs")
 (setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name "~/scripts")))
 (setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name "~/bin")))
 (setenv "PATH" (concat (getenv "PATH") ":" "/usr/local/go/bin"))
