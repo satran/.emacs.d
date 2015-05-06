@@ -14,16 +14,23 @@
 
 ;; Adding custom theme directory
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/solarized-theme-1.0.0")
+
+;; Setting up Marmalade and gny and melpa
+(require 'package)
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+(package-initialize)
 
 ;; Setting line numbers to all files
-;;(global-linum-mode 1)
+(global-linum-mode 1)
+;; Use hlinum-mode to highlight the current line
+(hlinum-activate)
+;; Offset the number by two spaces to work around some weird fringe 
+(setq linum-format "%3d ")
 
 ;; Setting column number
 (column-number-mode 1)
-
-;; Offset the number by two spaces to work around some weird fringe 
-(setq linum-format "%3d ")
 
 ;; Disable splash screen
 (setq inhibit-startup-message t)
@@ -38,7 +45,7 @@
 (menu-bar-mode -1)
 
 ;; Globally disable syntax highlight
-(global-font-lock-mode 0)
+;;(global-font-lock-mode 0)
 
 ;; Move across split windows using the shit+arrow keys
 (windmove-default-keybindings)
@@ -50,10 +57,10 @@
   (when (or window-system frame)
     ;; Setting the color scheme.
     ;; (load-theme 'oceanic t)
-    (load-theme 'solarized-dark t)
+    (load-theme 'minimal-light t)
 
     ;; Highlighting current line
-    (global-hl-line-mode 1)
+    ;;(global-hl-line-mode 1)
 
     (set-face-italic-p 'italic nil)
 
@@ -86,13 +93,6 @@
 
 ;; Highlight matching parenthesis
 (show-paren-mode 1)
-
-;; Setting up Marmalade and gny and melpa
-(require 'package)
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
-(package-initialize)
 
 ;; On enter new line and indent
 (defun set-newline-and-indent ()
@@ -293,4 +293,11 @@
 ;; Optionally, specify the lisp program you are using. Default is "lisp"
 (setq inferior-lisp-program "/usr/local/bin/sbcl") 
 
-(setq w3m-command "/usr/local/bin/w3m")
+(setq w3m-command "/bin/w3m")
+
+;; disable bold fonts
+(mapc
+ (lambda (face)
+        (when (eq (face-attribute face :weight) 'bold)
+          (set-face-attribute face nil :weight 'normal)))
+ (face-list))
