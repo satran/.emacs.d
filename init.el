@@ -64,9 +64,6 @@
 
     (set-face-italic-p 'italic nil)
 
-    ;; Disabling the fringe
-    (set-fringe-mode '(0 . 0))
-    ;;'(fringe-mode (quote (1 . 1)) nil (fringe))
     ;; Disable the scrollbar
     (scroll-bar-mode -1)
 
@@ -165,7 +162,6 @@
  '(erc-hide-list (quote ("JOIN" "KICK" "MODE")))
  '(erc-notice-highlight-type (quote prefix))
  '(erc-prompt ">")
- '(global-font-lock-mode nil)
  '(gnus-visible-headers (quote ("^From:" "^Subject:" "^Date:" "^To:" "^[BGF]?Cc:")))
  '(w3m-default-display-inline-images t))
 
