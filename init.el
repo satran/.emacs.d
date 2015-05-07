@@ -50,10 +50,10 @@
 (windmove-default-keybindings)
 
 ;; Disable the fringes
-(set-fringe-mode '(0 . 0))
+;;(set-fringe-mode '(0 . 0))
 
 ;; Enable the color theme
-(load-theme 'minimal-light t)
+(load-theme 'knot-light t)
 
 ;; GUI specific settings
 ;; Load the customizations after an emacsclient startsup.
@@ -64,7 +64,7 @@
     ;; (load-theme 'oceanic t)
 
     ;; Highlighting current line
-    ;;(global-hl-line-mode 1)
+    (global-hl-line-mode 1)
 
     (set-face-italic-p 'italic nil)
 
@@ -186,7 +186,6 @@
 (load "c-eldoc")
 (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
 
-;; A few of my own customizations
 ;; Disable all extras of GUI.
 (add-hook 'server-visit-hook 'disable-crappy-frames)
 (add-hook 'after-make-frame-functions 'disable-crappy-frames)
@@ -301,3 +300,18 @@
         (when (eq (face-attribute face :weight) 'bold)
           (set-face-attribute face nil :weight 'normal)))
  (face-list))
+
+;; Source http://emacs.stackexchange.com/questions/5371/how-to-change-emacs-windows-from-vertical-split-to-horizontal-split
+(defun window-split-toggle ()
+  "Toggle between horizontal and vertical split with two windows."
+  (interactive)
+  (if (> (length (window-list)) 2)
+      (error "Can't toggle with more than 2 windows!")
+    (let ((func (if (window-full-height-p)
+                    #'split-window-vertically
+                  #'split-window-horizontally)))
+      (delete-other-windows)
+      (funcall func)
+      (save-selected-window
+        (other-window 1)
+        (switch-to-buffer (other-buffer))))))
