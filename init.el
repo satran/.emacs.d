@@ -23,9 +23,8 @@
 (package-initialize)
 
 ;; Setting line numbers to all files
-(global-linum-mode 1)
-;; Use hlinum-mode to highlight the current line
-(hlinum-activate)
+;;(global-linum-mode 1)
+
 ;; Offset the number by two spaces to work around some weird fringe 
 (setq linum-format "%3d ")
 
@@ -50,6 +49,12 @@
 ;; Move across split windows using the shit+arrow keys
 (windmove-default-keybindings)
 
+;; Disable the fringes
+(set-fringe-mode '(0 . 0))
+
+;; Enable the color theme
+(load-theme 'minimal-light t)
+
 ;; GUI specific settings
 ;; Load the customizations after an emacsclient startsup.
 (defun disable-crappy-frames (&optional frame)
@@ -57,7 +62,6 @@
   (when (or window-system frame)
     ;; Setting the color scheme.
     ;; (load-theme 'oceanic t)
-    (load-theme 'minimal-light t)
 
     ;; Highlighting current line
     ;;(global-hl-line-mode 1)
