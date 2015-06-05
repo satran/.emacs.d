@@ -10,10 +10,13 @@
 (setenv "PATH" (concat (getenv "PATH") ":" "/usr/local/go/bin"))
 (setenv "GOPATH"(getenv "HOME"))
 
-(setq exec-path (append exec-path '("/usr/local/go/bin" "/Users/satran/bin")))
+(setq exec-path
+      (append exec-path
+	      '("/usr/local/go/bin" "/home/satran/bin" "/home/satran/scripts")))
 
 ;; Adding custom theme directory
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/solarized-theme-20150424.53")
 
 ;; Setting up Marmalade and gny and melpa
 (require 'package)
@@ -44,7 +47,7 @@
 (menu-bar-mode -1)
 
 ;; Globally disable syntax highlight
-;;(global-font-lock-mode 0)
+(global-font-lock-mode 0)
 
 ;; Move across split windows using the shit+arrow keys
 (windmove-default-keybindings)
@@ -53,16 +56,13 @@
 ;;(set-fringe-mode '(0 . 0))
 
 ;; Enable the color theme
-(load-theme 'knot-light t)
+(load-theme 'acme t)
 
 ;; GUI specific settings
 ;; Load the customizations after an emacsclient startsup.
-(defun disable-crappy-frames (&optional frame)
+(defun load-gui-stuff (&optional frame)
   "Disables scrollbars, toolbars and fringe while in graphical mode."
   (when (or window-system frame)
-    ;; Setting the color scheme.
-    ;; (load-theme 'oceanic t)
-
     ;; Highlighting current line
     (global-hl-line-mode 1)
 
@@ -71,17 +71,12 @@
     ;; Disable the scrollbar
     (scroll-bar-mode -1)
 
-    ;; check if we're on OSX to set the font
-    (when (featurep 'ns-win)
-      (custom-set-faces
-       '(default ((t (:height 120 :width normal :family "Menlo"))))))
     ;; Setting the default font
-    ;; (set-default-font "Meslo-12")
-    (set-face-attribute 'default nil :font "Meslo LG M 14")
+    (set-face-attribute 'default nil :font "DejaVu Sans Mono 14")
 
     ;; Disable the toolbar
     (tool-bar-mode -1)))
-(disable-crappy-frames)
+(load-gui-stuff)
 
 ;; Disabling bold fonts
 (set-face-bold-p 'bold nil)
@@ -187,8 +182,8 @@
 (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
 
 ;; Disable all extras of GUI.
-(add-hook 'server-visit-hook 'disable-crappy-frames)
-(add-hook 'after-make-frame-functions 'disable-crappy-frames)
+(add-hook 'server-visit-hook 'load-gui-stuff)
+(add-hook 'after-make-frame-functions 'load-gui-stuff)
 
 ;; Jumping windows
 (global-set-key "\C-x\C-n" 'other-window)
@@ -203,8 +198,7 @@
 (defun move-past-next-char (x)
   "Move the next occurrence of the character x"
   (interactive "k")
-  (progn
-    (search-forward x)))
+  (search-forward x))
 (global-set-key "\C-\M-f" 'move-past-next-char)
 
 (defun plumb ()
@@ -250,6 +244,9 @@
 ;; Go modules required
 ;;     go get code.google.com/p/rog-go/exp/cmd/godef
 ;;     go get -u github.com/nsf/gocode
+;;     go get golang.org/x/tools/cmd/goimports
+(add-hook 'before-save-hook 'gofmt-before-save)
+(setq gofmt-command "goimports")
 (add-hook 'before-save-hook 'gofmt-before-save)
 (add-hook 'go-mode-hook (lambda ()
                           (local-set-key (kbd "C-c C-r") 'go-remove-unused-imports)))
@@ -285,12 +282,12 @@
  '(w3m-arrived-anchor ((t (:foreground "DodgerBlue4")))))
 
 ;; slime settings to load sbcl
-(add-to-list 'load-path "/usr/local/bin/sbcl")
-(require 'slime)
+(add-to-list 'load-path "/bin/sbcl")
+;;(require 'slime)
 (add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
 (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
-;; Optionally, specify the lisp program you are using. Default is "lisp"
-(setq inferior-lisp-program "/usr/local/bin/sbcl") 
+;;;; Optionally, specify the lisp program you are using. Default is "lisp"
+(setq inferior-lisp-program "/bin/sbcl") 
 
 (setq w3m-command "/bin/w3m")
 
