@@ -9,9 +9,9 @@
    'acme
    `(cursor ((,class (:background "#073642" :foreground "#ffffff"))))
    `(border-color ((,class (:background "#87893B"))))
-   `(default ((,class (:background "#FFFFE4" :foreground "#073642"))))
+   `(default ((,class (:background "#FDF6E3" :foreground "#073642"))))
    `(highlight ((,class (:background "#DBDBAF"))))
-   `(fringe ((,class (:background "#FFFFE4"))))
+   `(fringe ((,class (:background "#FDF6E3"))))
    `(mode-line ((,class (:box (:line-width 1 :style 'released-button)
 			      :background "#E5FFFE" :foreground "#333333"))))
    `(mode-line-inactive ((,class (:box (:line-width 1 :style 'released-button)
