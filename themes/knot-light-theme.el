@@ -117,39 +117,6 @@
      `(hl-line ((,class (:background ,hl-background))))
      `(hl-line-face ((,class (:background ,hl-face-background))))
 
-     ;; org-mode
-     `(org-level-1 ((,class (:foreground ,foreground :height 1.6))))
-     `(org-level-2 ((,class (:foreground ,foreground :height 1.5))))
-     `(org-level-3 ((,class (:foreground ,foreground :height 1.4))))
-     `(org-level-4 ((,class (:foreground ,foreground :height 1.3))))
-     `(org-level-5 ((,class (:foreground ,foreground :height 1.2))))
-     `(org-level-6 ((,class (:foreground ,foreground :height 1.1))))
-     `(org-level-7 ((,class (:foreground ,foreground))))
-     `(org-level-8 ((,class (:foreground ,foreground))))
-
-     ;; outline
-     `(outline-1 ((,class (:inherit org-level-1))))
-     `(outline-2 ((,class (:inherit org-level-2))))
-     `(outline-3 ((,class (:inherit org-level-3))))
-     `(outline-4 ((,class (:inherit org-level-4))))
-     `(outline-5 ((,class (:inherit org-level-5))))
-     `(outline-6 ((,class (:inherit org-level-6))))
-     `(outline-7 ((,class (:inherit org-level-7))))
-     `(outline-8 ((,class (:inherit org-level-8))))
-
-     `(org-document-title ((,class (:foreground ,foreground))))
-
-     `(org-link ((,class (:background ,org-background :foreground ,foreground :underline t))))
-     `(org-tag ((,class (:background ,org-background :foreground ,foreground))))
-     `(org-warning ((,class (:background ,region :foreground ,foreground ))))
-     `(org-todo ((,class (:background ,region :foreground ,foreground ))))
-     `(org-done ((,class (:background ,region :foreground ,foreground ))))
-
-     `(org-table ((,class (:background ,org-background))))
-     `(org-code ((,class (:background ,org-background))))
-     `(org-date ((,class (:background ,org-background :underline t))))
-     `(org-block ((,class (:background ,org-background))))
-     `(org-block-background ((,class (:background ,org-background :foreground ,foreground))))
    ))
 
 ;;;###autoload
