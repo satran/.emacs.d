@@ -56,13 +56,16 @@
 ;;(set-fringe-mode '(0 . 0))
 
 ;; Enable the color theme
-(load-theme 'acme t)
+(load-theme 'solarized-light t)
 
 ;; GUI specific settings
 ;; Load the customizations after an emacsclient startsup.
 (defun load-gui-stuff (&optional frame)
   "Disables scrollbars, toolbars and fringe while in graphical mode."
   (when (or window-system frame)
+    (setq current-font-size 14)
+    (setq current-font-name "DejaVu Sans Mono")
+    
     ;; Highlighting current line
     (global-hl-line-mode 1)
 
@@ -72,11 +75,32 @@
     (scroll-bar-mode -1)
 
     ;; Setting the default font
-    (set-face-attribute 'default nil :font "DejaVu Sans Mono 14")
+    (set-face-attribute 'default nil :font (concat current-font-name " " (number-to-string current-font-size)))
 
     ;; Disable the toolbar
     (tool-bar-mode -1)))
 (load-gui-stuff)
+
+
+(defun inc-font-size ()
+  "increases font size"
+  (setq current-font-size (+ 1 current-font-size))
+  (let ((font-name (concat current-font-name " "
+			   (number-to-string current-font-size))))
+    (set-face-attribute 'default nil :font font-name)))
+
+(defun dec-font-size ()
+  "decreases font size"
+  (setq current-font-size (- 1 current-font-size))
+  (let ((font-name (concat current-font-name " "
+			   (number-to-string current-font-size))))
+    (set-face-attribute 'default nil :font font-name)))
+
+(defun office-mode ()
+  (progn
+    (disable-theme 'solarized-light)
+    (load-theme 'acme t)
+    (set-face-attribute 'default nil :font "DejaVu Sans Mono 18")))
 
 ;; Disabling bold fonts
 (set-face-bold-p 'bold nil)
@@ -205,7 +229,7 @@
   "sort of the plumber found in plan9"
   (interactive)
   (let ((file "") (line-no 1) (line (thing-at-point 'line)))
-    (string-match "\\([_~0-9a-zA-Z\\-\\.\\/]+\\):\?\\([0-9]*\\)" line)
+    (string-match "\\([_~0-9a-zA-Z\-\\.\\/]+\\):\?\\([0-9]*\\)" line)
     (setq file (match-string 1 line))
     (setq line-no (match-string 2 line))
     (if (and (not (string-equal file "")) (file-exists-p file))
@@ -255,6 +279,7 @@
 (add-hook 'go-mode-hook (lambda ()
                           (local-set-key (kbd "M-.") 'godef-jump)))
 (add-hook 'go-mode-hook 'go-eldoc-setup)
+(add-hook 'go-mode-hook 'flycheck-mode)
 
 (setq linum-disabled-modes-list
       '(eshell-mode term-mode wl-summary-mode compilation-mode eww-mode erc-mode
@@ -277,6 +302,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(flycheck-fringe-error ((t (:background "#FF6E64" :foreground "#990A1B" :weight normal))))
+ '(flycheck-fringe-info ((t (:background "#69B7F0" :foreground "#00629D" :weight normal))))
+ '(flycheck-fringe-warning ((t (:background "#DEB542" :foreground "#7B6000" :weight normal))))
  '(magit-item-highlight ((t nil)))
  '(w3m-anchor ((t (:foreground "DeepSkyBlue4"))))
  '(w3m-arrived-anchor ((t (:foreground "DodgerBlue4")))))
@@ -312,3 +340,7 @@
       (save-selected-window
         (other-window 1)
         (switch-to-buffer (other-buffer))))))
+
+
+;; This is specifically for stumpwm and ratpoison. The annoying space between frames.
+(setq frame-resize-pixelwise t)
