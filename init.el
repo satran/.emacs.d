@@ -29,7 +29,7 @@
 ;;(global-linum-mode 1)
 
 ;; Offset the number by two spaces to work around some weird fringe 
-(setq linum-format "%3d ")
+;;(setq linum-format "%3d ")
 
 ;; Setting column number
 (column-number-mode 1)
@@ -49,38 +49,25 @@
 ;; Globally disable syntax highlight
 (global-font-lock-mode 0)
 
-;; Move across split windows using the shit+arrow keys
-(windmove-default-keybindings)
-
 ;; Disable the fringes
 ;;(set-fringe-mode '(0 . 0))
 
-;; Enable the color theme
-(load-theme 'solarized-light t)
-
 ;; GUI specific settings
 ;; Load the customizations after an emacsclient startsup.
-(defun load-gui-stuff (&optional frame)
-  "Disables scrollbars, toolbars and fringe while in graphical mode."
-  (when (or window-system frame)
-    (setq current-font-size 14)
-    (setq current-font-name "DejaVu Sans Mono")
+
+(setq current-font-size 14)
+(setq current-font-name "DejaVu Sans Mono")
     
-    ;; Highlighting current line
-    (global-hl-line-mode 1)
+;; Highlighting current line
+(global-hl-line-mode 1)
 
-    (set-face-italic-p 'italic nil)
+(set-face-italic-p 'italic nil)
 
-    ;; Disable the scrollbar
-    (scroll-bar-mode -1)
-
-    ;; Setting the default font
-    (set-face-attribute 'default nil :font (concat current-font-name " " (number-to-string current-font-size)))
-
-    ;; Disable the toolbar
-    (tool-bar-mode -1)))
-(load-gui-stuff)
-
+(load-theme 'solarized-light t)
+(add-to-list 'default-frame-alist `(font . ,(concat current-font-name "-" (number-to-string current-font-size))))
+(add-to-list 'default-frame-alist '(menu-bar-lines . 0))
+(add-to-list 'default-frame-alist '(tool-bar-lines . 0))
+(add-to-list 'default-frame-alist '(vertical-scroll-bars nil))
 
 (defun inc-font-size ()
   "increases font size"
@@ -99,8 +86,8 @@
 (defun office-mode ()
   (progn
     (disable-theme 'solarized-light)
-    (load-theme 'acme t)
-    (set-face-attribute 'default nil :font "DejaVu Sans Mono 18")))
+    (load-theme 'solarized-dark t)
+    (set-face-attribute 'default nil :font "DejaVu Sans Mono 17")))
 
 ;; Disabling bold fonts
 (set-face-bold-p 'bold nil)
@@ -118,10 +105,6 @@
 (defun set-newline-and-indent ()
   (local-set-key (kbd "RET") 'newline-and-indent))
 (add-hook 'c-mode 'set-newline-and-indent)
-
-;; CMake mode
-(autoload 'cmake-mode "cmake-mode" "Loads mode for CMake files." t)
-(add-to-list 'auto-mode-alist '("\\CMakeLists.txt\\'" . cmake-mode))
 
 ;; Disable the gaudy colors in shell
 (setq ansi-color-names-vector		; better contrast colors
@@ -196,27 +179,17 @@
 ;; Shortcut for compiling
 (global-set-key [(f9)] 'compile)
 
-(require 'fill-column-indicator)
-(setq-default fci-rule-column 80)
-(setq-default fci-rule-color "#555555")
-
 ;; Eldoc mode for C
 (setq c-eldoc-includes "`pkg-config glib-2.0 tokyocabinet --cflags` -I./ -I../ ")
 (load "c-eldoc")
 (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
 
-;; Disable all extras of GUI.
-(add-hook 'server-visit-hook 'load-gui-stuff)
-(add-hook 'after-make-frame-functions 'load-gui-stuff)
 
-;; Jumping windows
-(global-set-key "\C-x\C-n" 'other-window)
-(defun other-window-backward(&optional n)
-  "Select the Nth previous window."
-  (interactive "P")
-  (other-window (prefix-numeric-value n)))
-(global-set-key "\C-x\C-p" 'other-window-backward)
+(global-set-key "\C-x\C-n" 'next-multiframe-window)
+(global-set-key "\C-x\C-p" 'previous-multiframe-window)
 
+;; Move across split windows using the shit+arrow keys
+(windmove-default-keybindings)
 
 ;; Move past a given character, like vims f
 (defun move-past-next-char (x)
@@ -306,6 +279,7 @@
  '(flycheck-fringe-info ((t (:background "#69B7F0" :foreground "#00629D" :weight normal))))
  '(flycheck-fringe-warning ((t (:background "#DEB542" :foreground "#7B6000" :weight normal))))
  '(magit-item-highlight ((t nil)))
+ '(vertical-border ((t (:inherit default :underline nil :weight normal))))
  '(w3m-anchor ((t (:foreground "DeepSkyBlue4"))))
  '(w3m-arrived-anchor ((t (:foreground "DodgerBlue4")))))
 
@@ -314,7 +288,7 @@
 ;;(require 'slime)
 (add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
 (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
-;;;; Optionally, specify the lisp program you are using. Default is "lisp"
+;; Optionally, specify the lisp program you are using. Default is "lisp"
 (setq inferior-lisp-program "/bin/sbcl") 
 
 (setq w3m-command "/bin/w3m")
@@ -326,21 +300,8 @@
           (set-face-attribute face nil :weight 'normal)))
  (face-list))
 
-;; Source http://emacs.stackexchange.com/questions/5371/how-to-change-emacs-windows-from-vertical-split-to-horizontal-split
-(defun window-split-toggle ()
-  "Toggle between horizontal and vertical split with two windows."
-  (interactive)
-  (if (> (length (window-list)) 2)
-      (error "Can't toggle with more than 2 windows!")
-    (let ((func (if (window-full-height-p)
-                    #'split-window-vertically
-                  #'split-window-horizontally)))
-      (delete-other-windows)
-      (funcall func)
-      (save-selected-window
-        (other-window 1)
-        (switch-to-buffer (other-buffer))))))
-
-
 ;; This is specifically for stumpwm and ratpoison. The annoying space between frames.
 (setq frame-resize-pixelwise t)
+
+;; Temporary setting to make things quicker in terminology
+(remove-hook 'find-file-hooks 'vc-find-file-hook)

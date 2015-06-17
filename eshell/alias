@@ -1,7 +1,7 @@
-alias git git --no-pager $*
-alias op cd /d/github.com/optiopay/$*
-alias gd git diff --color $*
-alias ff find-file $*
-alias gst git status
-alias q exit
+alias ff find-file $1
 alias rm~ find . -iname "*~" | xargs rm
+alias q exit
+alias gst git status
+alias gd git diff --color $*
+alias op cd /d/github.com/optiopay/$*
+alias git git --no-pager $*
