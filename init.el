@@ -24,9 +24,10 @@
                          ("marmalade" . "http://marmalade-repo.org/packages/")
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
 (package-initialize)
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
 
 ;; Setting line numbers to all files
-;;(global-linum-mode 1)
+(global-linum-mode 1)
 
 ;; Offset the number by two spaces to work around some weird fringe 
 ;;(setq linum-format "%3d ")
@@ -59,15 +60,15 @@
 (setq current-font-name "DejaVu Sans Mono")
     
 ;; Highlighting current line
-(global-hl-line-mode 1)
+;;(global-hl-line-mode 1)
 
 (set-face-italic-p 'italic nil)
 
-(load-theme 'solarized-light t)
+(load-theme 'solarized-dark t)
 (add-to-list 'default-frame-alist `(font . ,(concat current-font-name "-" (number-to-string current-font-size))))
 (add-to-list 'default-frame-alist '(menu-bar-lines . 0))
 (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
-(add-to-list 'default-frame-alist '(vertical-scroll-bars nil))
+(add-to-list 'default-frame-alist '(vertical-scroll-bars . nil))
 
 (defun inc-font-size ()
   "increases font size"
@@ -164,12 +165,79 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
-   ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"] t)
+   ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
+ '(compilation-message-face (quote default))
+ '(cua-global-mark-cursor-color "#2aa198")
+ '(cua-normal-cursor-color "#839496")
+ '(cua-overwrite-cursor-color "#b58900")
+ '(cua-read-only-cursor-color "#859900")
+ '(custom-safe-themes
+   (quote
+    ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" default)))
  '(erc-hide-list (quote ("JOIN" "KICK" "MODE")))
  '(erc-notice-highlight-type (quote prefix))
  '(erc-prompt ">")
+ '(fci-rule-color "#073642" t)
  '(gnus-visible-headers (quote ("^From:" "^Subject:" "^Date:" "^To:" "^[BGF]?Cc:")))
- '(w3m-default-display-inline-images t))
+ '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
+ '(highlight-symbol-colors
+   (--map
+    (solarized-color-blend it "#002b36" 0.25)
+    (quote
+     ("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2"))))
+ '(highlight-symbol-foreground-color "#93a1a1")
+ '(highlight-tail-colors
+   (quote
+    (("#073642" . 0)
+     ("#546E00" . 20)
+     ("#00736F" . 30)
+     ("#00629D" . 50)
+     ("#7B6000" . 60)
+     ("#8B2C02" . 70)
+     ("#93115C" . 85)
+     ("#073642" . 100))))
+ '(hl-bg-colors
+   (quote
+    ("#7B6000" "#8B2C02" "#990A1B" "#93115C" "#3F4D91" "#00629D" "#00736F" "#546E00")))
+ '(hl-fg-colors
+   (quote
+    ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
+ '(magit-diff-use-overlays nil)
+ '(mu4e-headers-fields (quote ((:human-date . 12) (:from-or-to . 22) (:subject))))
+ '(mu4e-headers-visible-columns 80)
+ '(mu4e-split-view (quote horizontal))
+ '(mu4e-view-fields (quote (:from :subject :date :tags :attachments)))
+ '(pos-tip-background-color "#073642")
+ '(pos-tip-foreground-color "#93a1a1")
+ '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
+ '(term-default-bg-color "#002b36")
+ '(term-default-fg-color "#839496")
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#dc322f")
+     (40 . "#c85d17")
+     (60 . "#be730b")
+     (80 . "#b58900")
+     (100 . "#a58e00")
+     (120 . "#9d9100")
+     (140 . "#959300")
+     (160 . "#8d9600")
+     (180 . "#859900")
+     (200 . "#669b32")
+     (220 . "#579d4c")
+     (240 . "#489e65")
+     (260 . "#399f7e")
+     (280 . "#2aa198")
+     (300 . "#2898af")
+     (320 . "#2793ba")
+     (340 . "#268fc6")
+     (360 . "#268bd2"))))
+ '(vc-annotate-very-old-color nil)
+ '(w3m-default-display-inline-images t)
+ '(weechat-color-list
+   (quote
+    (unspecified "#002b36" "#073642" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#839496" "#657b83"))))
 
 (setq gdb-many-windows t)
 
@@ -275,6 +343,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:background nil))))
  '(flycheck-fringe-error ((t (:background "#FF6E64" :foreground "#990A1B" :weight normal))))
  '(flycheck-fringe-info ((t (:background "#69B7F0" :foreground "#00629D" :weight normal))))
  '(flycheck-fringe-warning ((t (:background "#DEB542" :foreground "#7B6000" :weight normal))))
@@ -305,3 +374,5 @@
 
 ;; Temporary setting to make things quicker in terminology
 (remove-hook 'find-file-hooks 'vc-find-file-hook)
+
+(load-file "~/.emacs.d/mu4e.el")
