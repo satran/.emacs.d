@@ -1,3 +1,4 @@
+alias gl git log --oneline| head
 alias ff find-file $1
 alias rm~ find . -iname "*~" | xargs rm
 alias q exit
