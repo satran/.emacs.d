@@ -16,7 +16,7 @@
 
 ;; Adding custom theme directory
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/solarized-theme-20150424.53")
+;;(add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/solarized-theme-20150424.53")
 
 ;; Setting up Marmalade and gny and melpa
 (require 'package)
@@ -27,7 +27,7 @@
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
 
 ;; Setting line numbers to all files
-(global-linum-mode 1)
+;;(global-linum-mode 1)
 
 ;; Offset the number by two spaces to work around some weird fringe 
 ;;(setq linum-format "%3d ")
@@ -60,35 +60,15 @@
 (setq current-font-name "DejaVu Sans Mono")
     
 ;; Highlighting current line
-;;(global-hl-line-mode 1)
+(global-hl-line-mode 1)
 
 (set-face-italic-p 'italic nil)
 
-(load-theme 'solarized-dark t)
+(load-theme 'black t)
 (add-to-list 'default-frame-alist `(font . ,(concat current-font-name "-" (number-to-string current-font-size))))
 (add-to-list 'default-frame-alist '(menu-bar-lines . 0))
 (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
 (add-to-list 'default-frame-alist '(vertical-scroll-bars . nil))
-
-(defun inc-font-size ()
-  "increases font size"
-  (setq current-font-size (+ 1 current-font-size))
-  (let ((font-name (concat current-font-name " "
-			   (number-to-string current-font-size))))
-    (set-face-attribute 'default nil :font font-name)))
-
-(defun dec-font-size ()
-  "decreases font size"
-  (setq current-font-size (- 1 current-font-size))
-  (let ((font-name (concat current-font-name " "
-			   (number-to-string current-font-size))))
-    (set-face-attribute 'default nil :font font-name)))
-
-(defun office-mode ()
-  (progn
-    (disable-theme 'solarized-light)
-    (load-theme 'solarized-dark t)
-    (set-face-attribute 'default nil :font "DejaVu Sans Mono 17")))
 
 ;; Disabling bold fonts
 (set-face-bold-p 'bold nil)
@@ -126,6 +106,8 @@
 (require 'ido)
 (ido-mode t)
 (ido-vertical-mode 1)
+(setq ido-enable-flex-matching t)
+
 
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
@@ -138,16 +120,14 @@
 ;; Set such that emacs does not use the ugly word-wrapping
 (global-visual-line-mode 1)
 
-;; Keybinding to start the shell
-(global-set-key (kbd "C-z") 'eshell)
-(global-set-key (kbd "C-S-z") 'ansi-term)
+;; Eshell settings
 (setq Eshell-directory-name "/home/satran/.emacs.d/eshell")
 (setq eshell-prompt-function (lambda () (concat "% ")))
 (setq eshell-prompt-regexp "% ")
 
-;; Settings keybindings for Scroll line by line.
-(global-set-key (kbd "C-M-g") 'scroll-up-line)
-(global-set-key (kbd "C-M-y") 'scroll-down-line)
+;; Move across split windows using the shit+arrow keys
+(windmove-default-keybindings)
+
 
 ;; CTags settings
 (setq path-to-ctags "/usr/bin/etags")
@@ -171,100 +151,60 @@
  '(cua-normal-cursor-color "#839496")
  '(cua-overwrite-cursor-color "#b58900")
  '(cua-read-only-cursor-color "#859900")
- '(custom-safe-themes
-   (quote
-    ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" default)))
  '(erc-hide-list (quote ("JOIN" "KICK" "MODE")))
  '(erc-notice-highlight-type (quote prefix))
  '(erc-prompt ">")
  '(fci-rule-color "#073642" t)
  '(gnus-visible-headers (quote ("^From:" "^Subject:" "^Date:" "^To:" "^[BGF]?Cc:")))
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
- '(highlight-symbol-colors
-   (--map
-    (solarized-color-blend it "#002b36" 0.25)
-    (quote
-     ("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2"))))
- '(highlight-symbol-foreground-color "#93a1a1")
- '(highlight-tail-colors
-   (quote
-    (("#073642" . 0)
-     ("#546E00" . 20)
-     ("#00736F" . 30)
-     ("#00629D" . 50)
-     ("#7B6000" . 60)
-     ("#8B2C02" . 70)
-     ("#93115C" . 85)
-     ("#073642" . 100))))
- '(hl-bg-colors
-   (quote
-    ("#7B6000" "#8B2C02" "#990A1B" "#93115C" "#3F4D91" "#00629D" "#00736F" "#546E00")))
- '(hl-fg-colors
-   (quote
-    ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
- '(magit-diff-use-overlays nil)
  '(mu4e-headers-fields (quote ((:human-date . 12) (:from-or-to . 22) (:subject))))
  '(mu4e-headers-visible-columns 80)
  '(mu4e-split-view (quote horizontal))
  '(mu4e-view-fields (quote (:from :subject :date :tags :attachments)))
- '(pos-tip-background-color "#073642")
- '(pos-tip-foreground-color "#93a1a1")
- '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
- '(term-default-bg-color "#002b36")
- '(term-default-fg-color "#839496")
- '(vc-annotate-background nil)
- '(vc-annotate-color-map
-   (quote
-    ((20 . "#dc322f")
-     (40 . "#c85d17")
-     (60 . "#be730b")
-     (80 . "#b58900")
-     (100 . "#a58e00")
-     (120 . "#9d9100")
-     (140 . "#959300")
-     (160 . "#8d9600")
-     (180 . "#859900")
-     (200 . "#669b32")
-     (220 . "#579d4c")
-     (240 . "#489e65")
-     (260 . "#399f7e")
-     (280 . "#2aa198")
-     (300 . "#2898af")
-     (320 . "#2793ba")
-     (340 . "#268fc6")
-     (360 . "#268bd2"))))
- '(vc-annotate-very-old-color nil)
- '(w3m-default-display-inline-images t)
- '(weechat-color-list
-   (quote
-    (unspecified "#002b36" "#073642" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#839496" "#657b83"))))
+ '(solarized-use-less-bold t)
+ '(uniquify-buffer-name-style (quote post-forward) nil (uniquify))
+ '(w3m-default-display-inline-images t))
 
 (setq gdb-many-windows t)
-
-;; My Shortcuts
-(global-set-key (kbd "C-S-f") 'speedbar-get-focus)
-
-;; Shortcut for compiling
-(global-set-key [(f9)] 'compile)
 
 ;; Eldoc mode for C
 (setq c-eldoc-includes "`pkg-config glib-2.0 tokyocabinet --cflags` -I./ -I../ ")
 (load "c-eldoc")
 (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
 
+(defun inc-font-size ()
+  "increases font size"
+  (interactive)
+  (setq current-font-size (+ 1 current-font-size))
+  (let ((font-name (concat current-font-name " "
+			   (number-to-string current-font-size))))
+    (set-face-attribute 'default nil :font font-name)))
 
-(global-set-key "\C-x\C-n" 'next-multiframe-window)
-(global-set-key "\C-x\C-p" 'previous-multiframe-window)
+(defun dec-font-size ()
+  "decreases font size"
+  (interactive)
+  (setq current-font-size (- 1 current-font-size))
+  (let ((font-name (concat current-font-name " "
+			   (number-to-string current-font-size))))
+    (set-face-attribute 'default nil :font font-name)))
 
-;; Move across split windows using the shit+arrow keys
-(windmove-default-keybindings)
+(defun office-mode ()
+  (interactive)
+  (progn
+    ;;(set-face-attribute 'default nil :font "Input Mono 16")))
+    (set-face-attribute 'default nil :font "DejaVu Sans Mono 18")))
 
 ;; Move past a given character, like vims f
 (defun move-past-next-char (x)
   "Move the next occurrence of the character x"
   (interactive "k")
   (search-forward x))
-(global-set-key "\C-\M-f" 'move-past-next-char)
+
+(defun new-shell (name)
+  "creates a new shell with the given name"
+  (interactive "s")
+  (setq eshell-buffer-name (concat "*esh-" name "*"))
+  (eshell name))
 
 (defun plumb ()
   "sort of the plumber found in plan9"
@@ -276,12 +216,10 @@
     (if (and (not (string-equal file "")) (file-exists-p file))
 	(progn
 	  (message "%s:%s" file line-no)
-	  (switch-to-buffer (find-file-noselect file))
+	  (find-file-other-window file)
 	  (beginning-of-buffer)
 	  (if line-no (forward-line (- (string-to-number line-no) 1))))
       (message "%s not found" file))))
-;;(global-set-key "\C-c\C-g" 'plumb)
-(global-set-key (kbd "<C-return>") 'plumb)
 
 ;; A few key bindings that I would want to remember
 ;; C-x r <SPC> <char-for-register> - Mark a register
@@ -301,8 +239,6 @@
     (menu-bar-mode -1) ;;no menubar
     (scroll-bar-mode -1) ;; no scroll bar
     ))
-
-(global-set-key [f11] 'fullscreen)
 
 ;; Go lang setup
 ;; Install go-mode, go-eldoc
@@ -376,3 +312,26 @@
 (remove-hook 'find-file-hooks 'vc-find-file-hook)
 
 (load-file "~/.emacs.d/mu4e.el")
+
+
+;; Global Keybindings
+(global-set-key (kbd "C-z") 'eshell)
+(global-set-key (kbd "C-S-z") 'new-shell)
+(global-set-key (kbd "C-M-z") 'ansi-term)
+
+;; Settings keybindings for Scroll line by line.
+(global-set-key (kbd "C-M-g") 'scroll-up-line)
+(global-set-key (kbd "C-M-y") 'scroll-down-line)
+
+(global-set-key (kbd "C-S-f") 'speedbar-get-focus)
+
+;; Shortcut for compiling
+(global-set-key [(f9)] 'compile)
+
+;; More reasonable next windows
+(global-set-key "\C-x\C-n" 'next-multiframe-window)
+(global-set-key "\C-x\C-p" 'previous-multiframe-window)
+
+(global-set-key "\C-\M-f" 'move-past-next-char)
+(global-set-key (kbd "<C-return>") 'plumb)
+(global-set-key [f11] 'fullscreen)
