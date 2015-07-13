@@ -48,7 +48,7 @@
 (menu-bar-mode -1)
 
 ;; Globally disable syntax highlight
-(global-font-lock-mode 0)
+;; (global-font-lock-mode 0)
 
 ;; Disable the fringes
 ;;(set-fringe-mode '(0 . 0))
@@ -64,7 +64,7 @@
 
 (set-face-italic-p 'italic nil)
 
-(load-theme 'black t)
+(load-theme 'knot-dark t)
 (add-to-list 'default-frame-alist `(font . ,(concat current-font-name "-" (number-to-string current-font-size))))
 (add-to-list 'default-frame-alist '(menu-bar-lines . 0))
 (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
