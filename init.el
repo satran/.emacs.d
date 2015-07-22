@@ -8,7 +8,7 @@
 (setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name "~/scripts")))
 (setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name "~/bin")))
 (setenv "PATH" (concat (getenv "PATH") ":" "/usr/local/go/bin"))
-(setenv "GOPATH"(getenv "HOME"))
+(setenv "GOPATH" (getenv "GOPATH"))
 
 (setq exec-path
       (append exec-path
@@ -151,6 +151,9 @@
  '(cua-normal-cursor-color "#839496")
  '(cua-overwrite-cursor-color "#b58900")
  '(cua-read-only-cursor-color "#859900")
+ '(custom-safe-themes
+   (quote
+    ("96d8df1a8c906b3b1be0e02102e75e4d2971cf11e02e9775f95e05c6d93694de" default)))
  '(erc-hide-list (quote ("JOIN" "KICK" "MODE")))
  '(erc-notice-highlight-type (quote prefix))
  '(erc-prompt ">")
@@ -255,6 +258,8 @@
                           (local-set-key (kbd "C-c i") 'go-goto-imports)))
 (add-hook 'go-mode-hook (lambda ()
                           (local-set-key (kbd "M-.") 'godef-jump)))
+(add-hook 'go-mode-hook (lambda ()
+                          (local-set-key (kbd "M-,") 'godef-jump-other-window)))
 (add-hook 'go-mode-hook 'go-eldoc-setup)
 (add-hook 'go-mode-hook 'flycheck-mode)
 
