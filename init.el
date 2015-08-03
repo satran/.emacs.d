@@ -64,7 +64,7 @@
 
 (set-face-italic-p 'italic nil)
 
-(load-theme 'knot-dark t)
+(load-theme 'knot-solarized t)
 (add-to-list 'default-frame-alist `(font . ,(concat current-font-name "-" (number-to-string current-font-size))))
 (add-to-list 'default-frame-alist '(menu-bar-lines . 0))
 (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
@@ -340,3 +340,12 @@
 (global-set-key "\C-\M-f" 'move-past-next-char)
 (global-set-key (kbd "<C-return>") 'plumb)
 (global-set-key [f11] 'fullscreen)
+
+(global-set-key "\M-x"
+		(lambda ()
+		  (interactive)
+		  (call-interactively
+		   (intern
+		    (ido-completing-read
+		     "M-x "
+		     (all-completions "" obarray 'commandp))))))

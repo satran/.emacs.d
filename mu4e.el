@@ -2,8 +2,9 @@
 
 ;; default
 (setq mu4e-maildir "~/mail")
-(setq mu4e-html2text-command "w3m -dump -T text/html")
-(setq mu4e-get-mail-command "offlineimap")
+(setq mu4e-html2text-command "html2text --reference-links")
+(setq mu4e-get-mail-command "true"
+      mu4e-update-interval 300)
 
 ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
 (setq mu4e-sent-messages-behavior 'delete)
