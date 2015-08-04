@@ -34,7 +34,7 @@
        (background "#002b36")
        (keyword "white")
        (cursor "white")
-       (border "grey10")
+       (border "#073642")
        (minibuffer cursor)
        (region "#00667f")
        (comment-delimiter "grey30")
@@ -123,21 +123,21 @@
 
      `(org-document-title ((,class (:foreground ,foreground))))
 
-     `(org-link ((,class (:background ,org-background :foreground ,foreground :underline t))))
-     `(org-tag ((,class (:background ,org-background :foreground ,foreground))))
+     `(org-link ((,class (:foreground ,foreground :underline t))))
+     `(org-tag ((,class (:foreground ,foreground))))
      `(org-warning ((,class (:background ,region :foreground ,foreground :weight bold))))
      `(org-todo ((,class (:background ,region :foreground ,foreground :weight bold))))
      `(org-done ((,class (:background ,region :foreground ,foreground :weight bold))))
 
      `(org-table ((,class (:background ,org-background))))
      `(org-code ((,class (:background ,org-background))))
-     `(org-date ((,class (:background ,org-background :underline t))))
+     `(org-date ((,class (:underline t))))
      `(org-block ((,class (:background ,org-background))))
-     `(org-block-background ((,class (:background ,org-background :foreground ,foreground))))
+     `(org-block-background ((,class (:foreground ,foreground))))
      `(org-block-begin-line
-       ((,class (:background ,org-background :foreground ,comment-delimiter :weight bold))))
+       ((,class (:foreground ,comment-delimiter :weight bold))))
      `(org-block-end-line
-       ((,class (:background ,org-background :foreground ,comment-delimiter :weight bold))))
+       ((,class (:foreground ,comment-delimiter :weight bold))))
 
      ;; ERC settings
      `(erc-current-nick-face ((t (:foreground ,foreground  :underline nil :weight normal))))
