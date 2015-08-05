@@ -124,6 +124,16 @@
 (setq Eshell-directory-name "/home/satran/.emacs.d/eshell")
 (setq eshell-prompt-function (lambda () (concat "% ")))
 (setq eshell-prompt-regexp "% ")
+(defun eshell-clear-buffer ()
+  "Clear terminal"
+  (interactive)
+  (let ((inhibit-read-only t))
+    (erase-buffer)
+    (eshell-send-input)))
+(add-hook 'eshell-mode-hook
+      '(lambda()
+          (local-set-key (kbd "C-S-l") 'eshell-clear-buffer)))
+
 
 ;; Move across split windows using the shit+arrow keys
 (windmove-default-keybindings)
