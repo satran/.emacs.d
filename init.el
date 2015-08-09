@@ -26,6 +26,9 @@
 (package-initialize)
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
 
+;; load other scripts
+(load-file "~/.emacs.d/plumb.el")
+
 ;; Setting line numbers to all files
 ;;(global-linum-mode 1)
 
@@ -64,7 +67,7 @@
 
 (set-face-italic-p 'italic nil)
 
-(load-theme 'knot-solarized t)
+(load-theme 'knot-dark t)
 (add-to-list 'default-frame-alist `(font . ,(concat current-font-name "-" (number-to-string current-font-size))))
 (add-to-list 'default-frame-alist '(menu-bar-lines . 0))
 (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
@@ -217,22 +220,7 @@
   "creates a new shell with the given name"
   (interactive "s")
   (setq eshell-buffer-name (concat "*esh-" name "*"))
-  (eshell name))
-
-(defun plumb ()
-  "sort of the plumber found in plan9"
-  (interactive)
-  (let ((file "") (line-no 1) (line (thing-at-point 'line)))
-    (string-match "\\([_~0-9a-zA-Z\-\\.\\/]+\\):\?\\([0-9]*\\)" line)
-    (setq file (match-string 1 line))
-    (setq line-no (match-string 2 line))
-    (if (and (not (string-equal file "")) (file-exists-p file))
-	(progn
-	  (message "%s:%s" file line-no)
-	  (find-file-other-window file)
-	  (beginning-of-buffer)
-	  (if line-no (forward-line (- (string-to-number line-no) 1))))
-      (message "%s not found" file))))
+  (eshell name))	
 
 ;; A few key bindings that I would want to remember
 ;; C-x r <SPC> <char-for-register> - Mark a register
