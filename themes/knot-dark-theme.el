@@ -31,7 +31,7 @@
 
 (let* ((class '((class color) (min-colors 89)))
        (foreground "grey75")
-       (background "black")
+       (background "grey17")
        (keyword "white")
        (cursor "white")
        (border "grey10")
