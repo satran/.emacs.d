@@ -1,9 +1,9 @@
-alias l slock
-alias git git --no-pager $*
-alias op cd /d/github.com/optiopay/$*
-alias gd git diff --color $*
-alias gst git status
-alias q exit
-alias rmt find . -iname "*~" | xargs rm
-alias ff find-file $1
+alias nil $*
 alias gl git log --oneline| head
+alias ff find-file $1
+alias rmt find . -iname "*~" | xargs rm
+alias q exit
+alias gst git status
+alias gd git diff --color $*
+alias op cd /d/github.com/optiopay/$*
+alias git git --no-pager $*
