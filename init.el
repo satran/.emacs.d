@@ -5,10 +5,11 @@
 (setenv "GOROOT" "/usr/local/go")
 (setenv "EDITOR" "emacs")
 (setenv "VISUAL" "emacs")
-(setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name "~/scripts")))
 (setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name "~/bin")))
 (setenv "PATH" (concat (getenv "PATH") ":" "/usr/local/go/bin"))
-(setenv "GOPATH" (getenv "GOPATH"))
+(setenv "GOPATH" (if (getenv "GOPATH") (getenv "GOPATH") (getenv "HOME")))
+
+(setq frame-title-format "%b @ Emacs")
 
 (setq exec-path
       (append exec-path
@@ -25,6 +26,7 @@
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
 (package-initialize)
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/")
 
 ;; load other scripts
 (load-file "~/.emacs.d/plumb.el")
@@ -67,7 +69,15 @@
 
 (set-face-italic-p 'italic nil)
 
-(load-theme 'knot-dark t)
+(setq theme-name 'knot-dark)
+(load-theme theme-name t)
+(defun flip-theme ()
+  (interactive)
+  (if (eq theme-name 'knot-solarized)
+      (setq theme-name 'knot-light)
+    (setq theme-name 'knot-solarized))
+  (load-theme theme-name t))
+
 (add-to-list 'default-frame-alist `(font . ,(concat current-font-name "-" (number-to-string current-font-size))))
 (add-to-list 'default-frame-alist '(menu-bar-lines . 0))
 (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
@@ -159,6 +169,7 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
    ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
+ '(auth-source-save-behavior nil)
  '(compilation-message-face (quote default))
  '(cua-global-mark-cursor-color "#2aa198")
  '(cua-normal-cursor-color "#839496")
@@ -208,7 +219,10 @@
   (interactive)
   (progn
     ;;(set-face-attribute 'default nil :font "Input Mono 16")))
-    (set-face-attribute 'default nil :font "DejaVu Sans Mono 18")))
+    (setq current-font-size 16)
+    (let ((font-name (concat current-font-name " "
+			   (number-to-string current-font-size))))
+    (set-face-attribute 'default nil :font font-name))))
 
 ;; Move past a given character, like vims f
 (defun move-past-next-char (x)
@@ -261,6 +275,8 @@
 (add-hook 'go-mode-hook 'go-eldoc-setup)
 (add-hook 'go-mode-hook 'flycheck-mode)
 
+(setq flycheck-indication-mode nil)
+
 (setq linum-disabled-modes-list
       '(eshell-mode term-mode wl-summary-mode compilation-mode eww-mode erc-mode
 		    mu4e-about-mode mu4e-compose-mode mu4e-headers-mode
@@ -270,11 +286,6 @@
 	      (member major-mode linum-disabled-modes-list)) (linum-mode 1)))
 
 (setq gnus-summary-line-format "%I- %s [%a|%d]\n")
-
-(mapc
- (lambda (face)
-   (set-face-attribute face nil :weight 'normal :underline nil))
- (face-list))
 
 (display-time-mode t)
 (custom-set-faces
@@ -304,8 +315,8 @@
 ;; disable bold fonts
 (mapc
  (lambda (face)
-        (when (eq (face-attribute face :weight) 'bold)
-          (set-face-attribute face nil :weight 'normal)))
+   (when (eq (face-attribute face :weight) 'bold)
+     (set-face-attribute face nil :weight 'normal)))
  (face-list))
 
 ;; This is specifically for stumpwm and ratpoison. The annoying space between frames.
@@ -316,6 +327,20 @@
 
 (load-file "~/.emacs.d/mu4e.el")
 
+(setq exec-commands
+      (let ((paths (split-string (getenv "PATH") ":")) (commands '()))
+	(loop for path in paths do
+	      (setq commands
+		    (append commands
+			    (ignore-errors (directory-files path)))))
+	commands))
+
+
+(defun open-command ()
+  (interactive)
+  (let ((process (ido-completing-read "command: " exec-commands)))
+    (async-start-process (concat "proc-" process) process nil)))
+(global-set-key [f12] 'open-command)
 
 ;; Global Keybindings
 (global-set-key (kbd "C-z") 'eshell)
@@ -347,3 +372,9 @@
 		    (ido-completing-read
 		     "M-x "
 		     (all-completions "" obarray 'commandp))))))
+
+(global-set-key (kbd "M-[") 'insert-pair)
+(global-set-key (kbd "M-{") 'insert-pair)
+(global-set-key (kbd "M-\"") 'insert-pair)
+
+(autoload 'notmuch "notmuch" "notmuch mail" t)
