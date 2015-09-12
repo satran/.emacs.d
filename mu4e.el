@@ -2,9 +2,14 @@
 
 ;; default
 (setq mu4e-maildir "~/mail")
-(setq mu4e-html2text-command "html2text --reference-links")
+(require 'mu4e-contrib)
+(setq mu4e-html2text-command 'mu4e-shr2text)
+;; (setq mu4e-html2text-command "html2text --reference-links")
 (setq mu4e-get-mail-command "true"
       mu4e-update-interval 300)
+(setq mu4e-headers-fields (quote ((:subject) (:from-or-to . 22) )))
+(setq mu4e-headers-visible-columns 80)
+ 
 
 ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
 (setq mu4e-sent-messages-behavior 'delete)
