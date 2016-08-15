@@ -1,7 +1,11 @@
-;; Prior to installation
-;; go get github.com/rogpeppe/godef
-;; go get -u github.com/nsf/gocode
-;; go get golang.org/x/tools/cmd/goimports
+;; Prior to installation run this command
+(defun go-init ()
+  "Initializes all necessary command for custom Go support in Emacs"
+  (interactive)
+  (progn
+    (async-shell-command "go get github.com/rogpeppe/godef")
+    (async-shell-command "go get -u github.com/nsf/gocode")
+    (async-shell-command "go get golang.org/x/tools/cmd/goimports")))
 
 (load-or-install-package 'go-mode)
 (load-or-install-package 'go-eldoc)
@@ -19,5 +23,6 @@
 			  (local-set-key (kbd "M-,") 'godef-jump-other-window)))
 (add-hook 'go-mode-hook 'go-eldoc-setup)
 (add-hook 'go-mode-hook 'flycheck-mode)
+
 ;;(require 'go-autocomplete)
 ;;(add-hook 'go-mode-hook 'go-autocomplete)
