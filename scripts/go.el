@@ -3,9 +3,9 @@
   "Initializes all necessary command for custom Go support in Emacs"
   (interactive)
   (progn
-    (async-shell-command "go get github.com/rogpeppe/godef")
+    (async-shell-command "go get -u github.com/rogpeppe/godef")
     (async-shell-command "go get -u github.com/nsf/gocode")
-    (async-shell-command "go get golang.org/x/tools/cmd/goimports")))
+    (async-shell-command "go get -u golang.org/x/tools/cmd/goimports")))
 
 (load-or-install-package 'go-mode)
 (load-or-install-package 'go-eldoc)
