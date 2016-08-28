@@ -30,7 +30,4 @@
  '((emacs-lisp . t)
    (sh . t)))
 
-(let* ((variable-tuple (cond ((x-list-fonts "Open Sans") '(:font "Open Sans"))
-			     (nil (warn "Cannot find a Sans Serif Font.  Install Open Sans ."))))
-       (base-font-color     (face-foreground 'default nil 'default))
-       (headline           `(:inherit default :weight bold :foreground ,base-font-color))))
+
