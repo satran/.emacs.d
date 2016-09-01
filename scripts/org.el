@@ -12,16 +12,20 @@
 ;;      (cons '(:padline . "no")
 ;;	    (assq-delete-all :padline org-babel-default-header-args)))
 
-(setq org-agenda-files '("~/Dropbox/org/tasks.org"))
+(setq org-agenda-files '("~/Dropbox/org/"))
+
+(setq org-refile-targets
+      '((nil :maxlevel . 3)
+        (org-agenda-files :maxlevel . 3)))
+
 (setq org-default-notes-file "~/Dropbox/org/notes.org")
 
 (setq org-capture-templates
-      '(("t" "todo" entry (file "~/Dropbox/org/tasks.org")
+      '(("t" "todo" entry (file "~/Dropbox/org/gtg.org")
 	 "* TODO %?\n")
-	("f" "todo" entry (file "~/Dropbox/org/tasks.org")
-	 "* TODO %?\n%F\n")
 	("n" "note" entry (file "~/Dropbox/org/notes.org")
 	 "* %?\n")))
+
 (load-or-install-package 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
@@ -30,4 +34,11 @@
  '((emacs-lisp . t)
    (sh . t)))
 
+(defun gtd ()
+  (interactive)
+  (find-file "~/Dropbox/org/gtg.org"))
 
+(setq org-agenda-custom-commands 
+      '(("w" todo "WAITING" nil) 
+	("n" todo "NEXT" nil)
+	("d" "Agenda + Next Actions" ((agenda) (todo "NEXT")))))
