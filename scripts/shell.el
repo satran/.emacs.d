@@ -28,3 +28,7 @@
 	    (local-set-key (kbd "M-n") 'comint-next-matching-input-from-input)))
 (add-hook 'shell-mode-hook
 	  (lambda () (local-set-key (kbd "M-p") 'comint-previous-matching-input-from-input)))
+
+;; Have shell open in the same window
+(add-to-list 'display-buffer-alist
+     '("^\\*shell\\*$" . (display-buffer-same-window)))
