@@ -30,5 +30,5 @@
 	  (lambda () (local-set-key (kbd "M-p") 'comint-previous-matching-input-from-input)))
 
 ;; Have shell open in the same window
-(add-to-list 'display-buffer-alist
-     '("^\\*shell\\*$" . (display-buffer-same-window)))
+;; (add-to-list 'display-buffer-alist
+     ;; '("^\\*shell\\*$" . (display-buffer-same-window)))
