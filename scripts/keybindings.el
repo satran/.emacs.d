@@ -27,6 +27,9 @@
 (global-set-key (kbd "C-S-z") 'new-shell)
 (global-set-key (kbd "C-M-z") 'ansi-term)
 
+(global-set-key (kbd "C-x C-j") 'next-buffer)
+(global-set-key (kbd "C-x C-k") 'previous-buffer)
+
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; Settings keybindings for Scroll line by line.
