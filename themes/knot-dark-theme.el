@@ -30,7 +30,7 @@
 (deftheme knot-dark "minimal dark theme.")
 
 (let* ((class '((class color) (min-colors 89)))
-       (foreground "grey85")
+       (foreground "white")
        (background "grey14")
        (keyword "grey80")
        (cursor "grey80")
