@@ -35,4 +35,4 @@
 (setq solarized-use-less-bold t)
 (setq solarized-use-more-italic nil)
 (setq solarized-emphasize-indicators nil)
-(load-theme 'gotham t)
+(load-theme 'soothe t)
