@@ -31,6 +31,7 @@
 ;;		     "mu4e"
 		     "org"
 		     "plumb"
+		     "eww"
 		     "shell"))
 
 (dolist (file script-files)
@@ -41,10 +42,18 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-;; '(default ((t (:background "white" :foreground "gray30" :height 180 :family "Ubuntu Mono"))))
+ '(default ((t (:background "white" :foreground "gray30" :height 180 :family "Ubuntu Mono"))))
  '(Info-quoted ((t (:height 0.8 :family "Monospace"))))
  '(fixed-pitch ((t (:family "DejaVu Sans Mono"))))
-;; '(hl-line ((t (:background "white smoke"))))
+ '(fringe ((t nil)))
+ '(hl-line ((t (:background "white smoke"))))
+ '(org-level-1 ((t nil)))
+ '(org-level-2 ((t nil)))
+ '(org-level-3 ((t nil)))
+ '(org-level-4 ((t nil)))
+ '(org-level-5 ((t nil)))
+ '(org-level-6 ((t nil)))
+ '(org-todo ((t (:weight bold))))
  '(variable-pitch ((t (:height 0.8 :family "Merriweather Light")))))
 
 (custom-set-variables

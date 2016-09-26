@@ -8,7 +8,7 @@
 (setq default-cursor-type 'bar)
 
 ;; Globally disable syntax highlight
-;;(global-font-lock-mode 0)
+(global-font-lock-mode 0)
 
 ;; Highlighting current line
 (global-hl-line-mode 1)
@@ -35,4 +35,5 @@
 (setq solarized-use-less-bold t)
 (setq solarized-use-more-italic nil)
 (setq solarized-emphasize-indicators nil)
-(load-theme 'soothe t)
+;;(load-theme 'soothe t)
+
