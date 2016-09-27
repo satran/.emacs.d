@@ -19,3 +19,7 @@
 
 ;; Use vertical splitting more often than horizontal
 (setq split-height-threshold 200)
+
+;;(setq linum-format " %d ")
+;;(global-linum-mode t)
+

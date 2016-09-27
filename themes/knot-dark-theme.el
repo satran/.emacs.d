@@ -36,7 +36,7 @@
        (cursor "grey80")
        (border "grey10")
        (minibuffer cursor)
-       (region "red4")
+       (region "snow4")
        (comment-delimiter "grey40")
        (comment "grey40")
        (constant foreground)
@@ -47,6 +47,7 @@
        (modeline-background-inactive background)
        (hl-background "grey18")
        (hl-face-background nil)
+       (linum "grey30")
        (failure "red")
        (org-background "grey8")
        )
@@ -120,6 +121,9 @@
       ;; hl-line-mode
      `(hl-line ((,class (:background ,hl-background))))
      `(hl-line-face ((,class (:background ,hl-face-background))))
+
+     ;; linum mode
+     `(linum ((t (:inherit (shadow default) :foreground ,linum :height 0.8))))
 
      `(org-document-title ((,class (:foreground ,foreground))))
 
