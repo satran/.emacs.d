@@ -8,9 +8,7 @@
 (setq org-log-done t)
 (setq org-catch-invisible-edits t)
 
-;;(setq org-babel-default-header-args
-;;      (cons '(:padline . "no")
-;;	    (assq-delete-all :padline org-babel-default-header-args)))
+;;(setq org-babel-default-header-args (cons '(:padline . "no") (assq-delete-all :padline org-babel-default-header-args)))
 
 (setq org-agenda-files '("~/Dropbox/org/"))
 
