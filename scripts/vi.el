@@ -1,0 +1,8 @@
+(require 'evil)
+(evil-mode t)
+(define-key evil-normal-state-map " xs" 'save-buffer)
+(define-key evil-normal-state-map " xk" 'kill-buffer)
+(define-key evil-normal-state-map " xf" 'find-file)
+(define-key evil-normal-state-map " xb" 'ido-switch-buffer)
+(define-key evil-normal-state-map " xn" 'next-multiframe-window)
+(define-key evil-normal-state-map " xp" 'previous-multiframe-window)

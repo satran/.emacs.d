@@ -32,6 +32,7 @@
 		     "org"
 		     "plumb"
 		     "eww"
+		     "vi"
 		     "shell"))
 
 (dolist (file script-files)
@@ -66,3 +67,4 @@
     (gotham-theme yaml-mode w3m tao-theme solarized-theme smex paredit org-bullets markdown-mode magit ido-vertical-mode go-guru go-eldoc go-autocomplete flycheck exwm color-theme-sanityinc-solarized cider c-eldoc))))
 (put 'narrow-to-page 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+(put 'dired-find-alternate-file 'disabled nil)
