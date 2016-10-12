@@ -6,3 +6,4 @@
 (define-key evil-normal-state-map " xb" 'ido-switch-buffer)
 (define-key evil-normal-state-map " xn" 'next-multiframe-window)
 (define-key evil-normal-state-map " xp" 'previous-multiframe-window)
+(define-key evil-normal-state-map " z" 'shell)
