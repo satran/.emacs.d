@@ -28,7 +28,7 @@
 		     "ido"
 		     "keybindings"
 		     "lisp"
-;;		     "mu4e"
+		     "mail"
 		     "org"
 		     "plumb"
 		     "eww"
@@ -43,11 +43,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:background "white" :foreground "gray30" :height 180 :family "Ubuntu Mono"))))
  '(Info-quoted ((t (:height 0.8 :family "Monospace"))))
  '(fixed-pitch ((t (:family "DejaVu Sans Mono"))))
  '(fringe ((t nil)))
- '(hl-line ((t (:background "white smoke"))))
  '(org-level-1 ((t nil)))
  '(org-level-2 ((t nil)))
  '(org-level-3 ((t nil)))
@@ -62,9 +60,24 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#110F13" "#B13120" "#719F34" "#CEAE3E" "#7C9FC9" "#7868B5" "#009090" "#F4EAD5"])
+ '(custom-safe-themes
+   (quote
+    ("0371ff0cdce7c7ea0beee7716c0c251da292903f4db29758c44be8d25de003da" default)))
+ '(fci-rule-character-color "#202020")
+ '(fci-rule-color "#202020" t)
+ '(fringe-mode 4 nil (fringe))
+ '(main-line-color1 "#1E1E1E")
+ '(main-line-color2 "#111111")
+ '(main-line-separator-style (quote chamfer))
  '(package-selected-packages
    (quote
-    (gotham-theme yaml-mode w3m tao-theme solarized-theme smex paredit org-bullets markdown-mode magit ido-vertical-mode go-guru go-eldoc go-autocomplete flycheck exwm color-theme-sanityinc-solarized cider c-eldoc))))
+    (god-mode evil-visual-mark-mode elnode gotham-theme yaml-mode w3m tao-theme solarized-theme smex paredit org-bullets markdown-mode magit ido-vertical-mode go-guru go-eldoc go-autocomplete flycheck exwm color-theme-sanityinc-solarized cider c-eldoc)))
+ '(powerline-color1 "#1E1E1E")
+ '(powerline-color2 "#111111"))
 (put 'narrow-to-page 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 (put 'dired-find-alternate-file 'disabled nil)
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
