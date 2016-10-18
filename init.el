@@ -32,7 +32,6 @@
 		     "org"
 		     "plumb"
 		     "eww"
-		     "vi"
 		     "shell"))
 
 (dolist (file script-files)

@@ -23,3 +23,10 @@
 ;;(setq linum-format " %d ")
 ;;(global-linum-mode t)
 
+
+;; split frame into 3 windows evenly
+(defun split-3-even ()
+  (interactive)
+  (dotimes (number 2)
+    (split-window-right))
+  (balance-windows))
