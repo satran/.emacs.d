@@ -57,6 +57,6 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; powerline to setup mode line
-(setq powerline-display-buffer-size nil)
-(setq powerline-display-hud nil)
-(powerline-default-theme)
+;;(setq powerline-display-buffer-size nil)
+;;(setq powerline-display-hud nil)
+;;(powerline-default-theme)
