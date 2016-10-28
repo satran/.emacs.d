@@ -1,10 +1,3 @@
-;; Create new shell with name
-(defun new-shell (name)
-  "creates a new shell with the given name"
-  (interactive "s")
-  (setq eshell-buffer-name (concat "*esh-" name "*"))
-  (shell name))
-
 ;; Full screen in Linux
 (defun fullscreen ()
   (interactive)
@@ -24,7 +17,6 @@
 
 ;; Global Keybindings
 (global-set-key (kbd "C-z") 'shell)
-(global-set-key (kbd "C-S-z") 'new-shell)
 (global-set-key (kbd "C-M-z") 'ansi-term)
 
 (global-set-key (kbd "C-x C-j") 'next-buffer)

@@ -1,4 +1,4 @@
-(setq Eshell-directory-name "/home/satran/.emacs.d/eshell")
+(setq eshell-directory-name "/home/satran/.emacs.d/eshell")
 (setq eshell-prompt-function (lambda () (concat "% ")))
 (setq eshell-prompt-regexp "% ")
 (defun eshell-clear-buffer ()
@@ -32,3 +32,16 @@
 ;; Have shell open in the same window
 ;; (add-to-list 'display-buffer-alist
      ;; '("^\\*shell\\*$" . (display-buffer-same-window)))
+
+(defvar random-names '("elrond" "mordor" "shire" "bree"))
+
+(defun random-shell-name ()
+  (let ((ret (car random-names)))
+    (setq random-names (cdr random-names))
+    ret))
+
+(defun random-shell ()
+  (interactive)
+  (shell (concat "shell-" (random-shell-name))))
+
+(global-set-key (kbd "C-S-z") 'random-shell)
