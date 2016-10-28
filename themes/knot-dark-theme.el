@@ -30,16 +30,16 @@
 (deftheme knot-dark "minimal dark theme.")
 
 (let* ((class '((class color) (min-colors 89)))
-       (foreground "white")
+       (foreground "grey90")
        (background "grey20")
-       (keyword "grey80")
-       (cursor "grey80")
+       (keyword "white")
+       (cursor "white")
        (border "grey10")
        (minibuffer cursor)
        (region "dark slate gray")
        (comment-delimiter "grey40")
        (comment "grey40")
-       (constant foreground)
+       (constant keyword)
        (string "grey70")
        (modeline-foreground foreground)
        (modeline-background "grey18")
@@ -68,7 +68,7 @@
    `(secondary-selection ((,class (:background ,region))))
 
    ;; fringe
-   `(fringe ((,class (:background ,background))))
+   `(fringe ((,class (:background ,background :foreground ,foreground))))
    
    ;; faces
    `(font-lock-builtin-face ((,class (:foreground ,keyword))))
