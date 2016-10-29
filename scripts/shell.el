@@ -33,15 +33,15 @@
 ;; (add-to-list 'display-buffer-alist
      ;; '("^\\*shell\\*$" . (display-buffer-same-window)))
 
-(defvar random-names '("elrond" "mordor" "shire" "bree"))
 
-(defun random-shell-name ()
-  (let ((ret (car random-names)))
-    (setq random-names (cdr random-names))
-    ret))
+(defvar name-counter 0)
 
-(defun random-shell ()
+(defun new-shell-name ()
+  (setq name-counter (+ 1 name-counter))
+  (concat "shell-" (number-to-string name-counter)))
+
+(defun new-shell ()
   (interactive)
-  (shell (concat "shell-" (random-shell-name))))
+  (shell (new-shell-name)))
 
-(global-set-key (kbd "C-S-z") 'random-shell)
+(global-set-key (kbd "C-S-z") 'new-shell)
