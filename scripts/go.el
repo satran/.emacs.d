@@ -23,5 +23,6 @@
 			  (local-set-key (kbd "M-,") 'godef-jump-other-window)))
 (add-hook 'go-mode-hook 'go-eldoc-setup)
 (add-hook 'go-mode-hook 'flycheck-mode)
-;;(require 'go-autocomplete)
 ;;(add-hook 'go-mode-hook 'go-autocomplete)
+
+
