@@ -124,7 +124,13 @@
 
      ;; linum mode
      `(linum ((t (:inherit (shadow default) :foreground ,linum :height 0.8))))
+;;;;; auto-complete
+     `(ac-candidate-face ((,class (:background ,modeline-background :foreground ,foreground))))
+     `(ac-selection-face ((,class (:background ,region :foreground ,foreground))))
+     `(ac-candidate-mouse-face ((,class (:background ,region :foreground ,foreground))))
+     `(ac-completion-face ((,class (:foreground ,comment :underline t))))
 
+;;;;; org mode
      `(org-document-title ((,class (:foreground ,foreground))))
 
      `(org-link ((,class (:background ,org-background :foreground ,foreground :underline t))))
