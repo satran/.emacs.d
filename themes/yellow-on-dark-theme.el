@@ -1,8 +1,6 @@
-;;; knot-dark-theme.el --- based on minimal theme
-;;; minimal-theme.el --- A light/dark minimalistic Emacs 24 theme.
+;;; yellow-on-dark-theme.el --- based on minimal theme by Anler Hp
 
 ;; Copyright (C) 2014 Anler Hp
-
 ;; Author: Anler Hp <anler86 [at] gmail.com>
 ;; Keywords: color, theme, minimal
 ;; X-URL: http://github.com/ikame/minimal-theme
@@ -21,26 +19,20 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-;;; Commentary:
-;;
-;; A minimalistic color theme to avoid distraction with
-;; colors. Based on monochrome theme.
-
-;;; Code:
-(deftheme knot-dark "minimal dark theme.")
+(deftheme yellow-on-dark "minimal dark theme.")
 
 (let* ((class '((class color) (min-colors 89)))
-       (foreground "grey90")
+       (foreground "wheat3")
        (background "grey20")
-       (keyword "white")
-       (cursor "white")
+       (keyword "wheat1")
+       (cursor keyword)
        (border "grey10")
        (minibuffer cursor)
        (region "dark slate gray")
-       (comment-delimiter "grey40")
-       (comment "grey40")
+       (comment "wheat4")
+       (comment-delimiter comment)
        (constant keyword)
-       (string "grey70")
+       (string "tan")
        (modeline-foreground foreground)
        (modeline-background "grey18")
        (modeline-foreground-inactive comment)
@@ -53,7 +45,7 @@
        )
   (setq fci-rule-color comment)
   (custom-theme-set-faces
-   'knot-dark
+   'yellow-on-dark
 
    ;; basic stuff
    `(default ((,class (:background ,background :foreground ,foreground))))
@@ -124,7 +116,8 @@
 
      ;; linum mode
      `(linum ((t (:inherit (shadow default) :foreground ,linum :height 0.8))))
-;;;;; auto-complete
+
+     ;; auto-complete
      `(ac-candidate-face ((,class (:background ,modeline-background :foreground ,foreground))))
      `(ac-selection-face ((,class (:background ,region :foreground ,foreground))))
      `(ac-candidate-mouse-face ((,class (:background ,region :foreground ,foreground))))
@@ -133,7 +126,7 @@
      `(ac-gtags-selection-face ((,class (:background ,region :foreground ,comment))))
      `(popup-summary-face ((,class (:background ,modeline-background :foreground ,comment))))
 
-;;;;; org mode
+     ;; org mode
      `(org-document-title ((,class (:foreground ,foreground))))
 
      `(org-link ((,class (:background ,org-background :foreground ,foreground :underline t))))
@@ -141,7 +134,6 @@
      `(org-warning ((,class (:background ,region :foreground ,foreground :weight bold))))
      `(org-todo ((,class (:background ,region :foreground ,foreground :weight bold))))
      `(org-done ((,class (:background ,region :foreground ,foreground :weight bold))))
-
      `(org-table ((,class (:background ,org-background))))
      `(org-code ((,class (:background ,org-background))))
      `(org-date ((,class (:background ,org-background :underline t))))
@@ -158,11 +150,14 @@
      `(erc-input-face ((t (:foreground ,foreground))))
      `(erc-nick-default-face ((t (:foreground ,keyword :weight normal))))
      `(erc-notice-face ((t (:foreground ,foreground))))
-     `(erc-timestamp-face ((t (:foreground ,foreground))))))
+     `(erc-timestamp-face ((t (:foreground ,foreground))))
+
+     ;; Misc
+     `(font-lock-warning-face ((t (:foreground ,foreground))))))
 
 ;;;###autoload
 (when (and (boundp 'custom-theme-load-path) load-file-name)
   (add-to-list 'custom-theme-load-path
                (file-name-as-directory (file-name-directory load-file-name))))
 
-(provide-theme 'knot-dark)
+(provide-theme 'yellow-on-dark)
