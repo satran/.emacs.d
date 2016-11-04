@@ -153,7 +153,10 @@
      `(erc-timestamp-face ((t (:foreground ,foreground))))
 
      ;; Misc
+     `(sh-heredoc ((t (:foreground ,string))))
+     `(sh-quoted-exec ((t (:foreground ,keyword))))
      `(font-lock-warning-face ((t (:foreground ,foreground))))))
+
 
 ;;;###autoload
 (when (and (boundp 'custom-theme-load-path) load-file-name)
