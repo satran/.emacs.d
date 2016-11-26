@@ -73,9 +73,7 @@
  '(main-line-separator-style (quote chamfer))
  '(package-selected-packages
    (quote
-    (god-mode evil-visual-mark-mode elnode gotham-theme yaml-mode w3m tao-theme solarized-theme smex paredit org-bullets markdown-mode magit ido-vertical-mode go-guru go-eldoc go-autocomplete flycheck exwm color-theme-sanityinc-solarized cider c-eldoc)))
- '(powerline-color1 "#1E1E1E")
- '(powerline-color2 "#111111"))
+    (org-bullets smex ido-vertical-mode go-eldoc go-mode cider c-eldoc go-autocomplete))))
 (put 'narrow-to-page 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 (put 'dired-find-alternate-file 'disabled nil)
