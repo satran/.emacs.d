@@ -64,7 +64,7 @@
    ["#110F13" "#B13120" "#719F34" "#CEAE3E" "#7C9FC9" "#7868B5" "#009090" "#F4EAD5"])
  '(custom-safe-themes
    (quote
-    ("0371ff0cdce7c7ea0beee7716c0c251da292903f4db29758c44be8d25de003da" default)))
+    ("97bc9e4b411bea162ebb373c15ae644734a12479a376e0a52019d0700db0d33e" "1bb668b9c5cc47c39c0e4829293c9d6d4ddb09783a6b62f420a6c7079ecfcb74" "0371ff0cdce7c7ea0beee7716c0c251da292903f4db29758c44be8d25de003da" default)))
  '(fci-rule-character-color "#202020")
  '(fci-rule-color "#202020" t)
  '(fringe-mode 4 nil (fringe))
@@ -73,7 +73,9 @@
  '(main-line-separator-style (quote chamfer))
  '(package-selected-packages
    (quote
-    (org-bullets smex ido-vertical-mode go-eldoc go-mode cider c-eldoc go-autocomplete))))
+    (writeroom-mode visual-fill-column slime molokai-theme twilight-theme god-mode evil-visual-mark-mode elnode gotham-theme yaml-mode w3m tao-theme solarized-theme smex paredit org-bullets markdown-mode magit ido-vertical-mode go-guru go-eldoc go-autocomplete flycheck exwm color-theme-sanityinc-solarized cider c-eldoc)))
+ '(powerline-color1 "#1E1E1E")
+ '(powerline-color2 "#111111"))
 (put 'narrow-to-page 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 (put 'dired-find-alternate-file 'disabled nil)

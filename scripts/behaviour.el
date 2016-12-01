@@ -1,3 +1,6 @@
+;; Set the window title to be the buffer
+(setq frame-title-format "%b")
+
 ;; Automatically indent code after RET
 (electric-indent-mode +1)
 
