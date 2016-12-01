@@ -36,6 +36,8 @@
 ;; More reasonable next windows
 (global-set-key "\C-x\C-n" 'next-multiframe-window)
 (global-set-key "\C-x\C-p" 'previous-multiframe-window)
+(global-set-key (kbd "C-x n") 'next-multiframe-window)
+(global-set-key (kbd "C-x p") 'previous-multiframe-window)
 
 (global-set-key "\C-\M-f" 'move-past-next-char)
 (global-set-key (kbd "<C-return>") 'plumb)
